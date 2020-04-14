@@ -1,0 +1,8 @@
+---
+
+- name: Include systemd role
+  include_role:
+    name: usegalaxy_eu.galaxy_systemd
+  vars:
+    galaxy_systemd_mode: mule
+    galaxy_zergpool_listen_addr: 127.0.0.1:8080

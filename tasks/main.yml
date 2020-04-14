@@ -1,0 +1,37 @@
+---
+
+- name: Install dependencies 
+  import_tasks: pre-tasks.yml
+ 
+- name: Include postgresql role
+  include_role:
+    name: galaxyproject.postgresql
+
+- name: Include natefoo role
+  import_tasks: postgresql_objects.yml
+
+- name: Include geerlingguy role
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_package: python3-pip
+
+- name: Include galaxy role
+  import_tasks: galaxyproject_galaxy.yml
+
+- name: Include miniconda role
+  import_tasks: miniconda.yml
+
+- name: Include systemd role
+  import_tasks: systemd.yml
+
+- name: Include nginx role
+  import_tasks: nginx.yml
+
+- name: Change owner Galaxy dir
+  file:
+    path: /home/galaxy
+    state: directory
+    recurse: yes
+    owner: galaxy
+    group: galaxy

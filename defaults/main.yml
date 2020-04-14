@@ -1,0 +1,143 @@
+---
+
+# Galaxy instance ssh public key
+laniakea_galaxy_instance_key_pub: ""
+
+# Galaxy virtual elastic cluster support: Currently supported local and slurm
+laniakea_galaxy_lrms: local
+
+#______________________________________
+# Galaxy administrator
+
+# Enable Galaxy administrator user creation.
+laniakea_create_galaxy_admin: true
+
+# Galaxy administrator username
+GALAXY_ADMIN_USERNAME: "galaxy_admin_username"
+
+# Galaxy administrator password.
+# It is hard coded. To be changed by the administrator.
+GALAXY_ADMIN_PASSWORD: "galaxy_admin_password"
+
+# Galaxy administrator API_KEY. https://wiki.galaxyproject.org/Admin/API
+# Please note that this key acts as an alternate means to access your account, and should be treated with the same care as your login password. To be changed by the administrator.
+GALAXY_ADMIN_API_KEY: "GALAXY_ADMIN_API_KEY"
+
+# Galaxy administrator e-mail address
+GALAXY_ADMIN_EMAIL: "admin@server.com"
+
+#______________________________________
+# Galaxy configuration
+
+galaxy_user: {name: galaxy, shell: /bin/bash}
+galaxy_root: /home/galaxy
+galaxy_commit_id: release_20.01
+galaxy_config_style: yaml
+galaxy_config_file: /home/galaxy/config/galaxy.yml
+galaxy_dynamic_job_rules_dir: "{{ galaxy_server_dir }}/lib/galaxy/jobs/rules"
+
+# Galaxy userdata are stored here
+laniakea_export_dir: "/export"
+
+# Tool dependency directory
+laniakea_tool_deps_path: "{{ export_dir }}/tool_deps"
+
+# Conda configuration
+#laniakea_conda_prefix: "{{ tool_deps_path }}/_conda"
+#laniakea_conda_channels: "iuc,bioconda,r,defaults,conda-forge"
+
+# Update UCSC genome database
+laniakea_update_ucsc: true
+laniakea_fast_update: true # Force database update by copying cached files. Only for testing!
+
+# Enable pbkdf2
+laniakea_use_pbkdf2: true
+
+# Galaxy login
+#laniakea_require_login: "True"
+#laniakea_allow_user_creation: "False"
+#laniakea_allow_user_impersonation: "True"
+#laniakea_new_user_dataset_access_role_default_private: "True"
+
+#______________________________________
+# Postgres database details
+laniakea_postgresql_version: 10
+#laniakea_galaxy_db_dir: "{{export_dir}}/galaxy/database"
+#laniakea_galaxy_db_port: 5432
+#laniakea_galaxy_db_passwd: 'galaxy'
+#laniakea_galaxy_database_connection: 'postgresql://{{ galaxy_user }}:{{ galaxy_db_passwd }}@localhost:{{ galaxy_db_port }}/{{ galaxy_user }}'
+#laniakea_galaxy_install_database_connection: 'postgresql://{{ galaxy_user }}:{{ galaxy_db_passwd }}@localhost:{{ galaxy_db_port }}/galaxy_tools'
+#laniakea_set_pgsql_random_password: true
+galaxy_postgresql_objects_users: 
+  - name: galaxy
+galaxy_postgresql_objects_databases:
+  - name: galaxy
+  - name: galaxy_tools
+
+#______________________________________
+# NGINX
+#laniakea_nginx_upload_store_path: "{{galaxy_db_dir}}/tmp/nginx_upload_store"
+laniakea_nginx_https: false
+#laniakea_ssl_cert: /etc/certs/cert.pem
+#laniakea_ssl_key: /etc/certs/key.pem
+#laniakea_ssl_dhparam: /etc/certs/dhparam.pem
+
+#______________________________________
+# PROFTPD
+laniakea_proftpd_welcome: "galaxy ftp server"
+laniakea_proftpd_conf_path: "/etc/proftpd.conf"
+laniakea_proftpd_db_user: "galaxyftp"
+laniakea_proftpd_db_passwd: 'galaxy'
+laniakea_proftpd_files_path: "{{galaxy_db_dir}}/ftp"
+laniakea_proftpd_ftp_port: 21
+laniakea_proftpd_passive_port_low: 30000
+laniakea_proftpd_passive_port_high: 30009
+laniakea_set_proftpd_random_password: true
+
+#______________________________________
+# Init system
+# Supported: supervisord, init
+# supervisord ---> Current default, it is mandatory for docker container, since there's no systemd.
+# init ----------> CentOS 7 and Ubuntu 16.04 use systemd, Ubuntu 14.04 is using upstart.
+#laniakea_init_type: 'supervisord'
+
+#laniakea_supervisor_manage_postgres: "False"
+#laniakea_supervisor_manage_nginx: "False"
+#laniakea_supervisor_manage_proftpd: "False"
+
+#______________________________________
+# Enable advanced storage configuration
+# False by default!
+# If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
+# Facts needs to be gathered!
+
+laniakea_enable_storage_advanced_options: false
+
+#______________________________________
+# Inform the role if galaxy tools and reference data will be installed
+# If yes, galaxy is not started
+laniakea_galaxy_flavor: 'galaxy-no-tools'
+laniakea_get_refdata: false
+
+#______________________________________
+# Certbot
+certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+certbot_auth_method: --webroot
+certbot_install_method: virtualenv
+certbot_auto_renew: yes
+certbot_auto_renew_user: root
+certbot_environment: staging
+certbot_well_known_root: /srv/nginx/_well-known_root
+certbot_share_key_users:
+  - nginx
+certbot_post_renewal: |
+    systemctl restart nginx || true
+certbot_domains:
+ - "{{ inventory_hostname }}"
+certbot_agree_tos: --agree-tos
+
+#_____________________________________
+# Systemd
+galaxy_restart_handler_name: "Restart Galaxy"
+

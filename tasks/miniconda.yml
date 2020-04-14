@@ -1,0 +1,8 @@
+---
+
+- name: Include miniconda role
+  include_role:
+    name: uchida.miniconda
+  vars:
+    miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+    miniconda_version: "4.6.14"
