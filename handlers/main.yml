@@ -1,0 +1,6 @@
+---
+
+- name: Restart Galaxy
+  systemd:
+    name: galaxy
+    state: restarted

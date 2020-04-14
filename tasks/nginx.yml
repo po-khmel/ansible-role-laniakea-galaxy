@@ -1,0 +1,28 @@
+---
+
+- name: Install nginx dependencies
+  apt:
+    pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
+- name: Create tmp dir
+  file:
+    path: /export/galaxy/database/tmp
+    state: directory
+    owner: galaxy
+    group: galaxy
+- name: Create nginx_upload_store dir
+  file:
+    path: /export/galaxy/database/tmp/nginx_upload_store
+    state: directory
+    owner: www-data
+    group: galaxy
+- name: Include nginx role
+  include_role:
+    name: galaxyproject.nginx
+  vars:
+    nginx_selinux_allow_local_connections: true
+    nginx_flavor: extras=1.10.3-0ubuntu0.16.04.2ppa1
+    nginx_servers:
+      - galaxy
+    nginx_enable_default_server: false
+    nginx_conf_http:
+      client_max_body_size: 1g

@@ -1,0 +1,11 @@
+---
+
+- name: Include natefoo role
+  include_role:
+    name: natefoo.postgresql_objects
+    apply:
+      become: true
+      become_user: postgres
+  vars:
+    postgresql_objects_users: "{{ galaxy_postgresql_objects_users }}"
+    postgresql_objects_databases: "{{ galaxy_postgresql_objects_databases }}"
