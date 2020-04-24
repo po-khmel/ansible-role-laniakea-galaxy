@@ -1,16 +1,16 @@
 ---
 
 # Galaxy instance ssh public key
-laniakea_galaxy_instance_key_pub: ""
+galaxy_instance_key_pub: ""
 
 # Galaxy virtual elastic cluster support: Currently supported local and slurm
-laniakea_galaxy_lrms: local
+galaxy_lrms: local
 
 #______________________________________
 # Galaxy administrator
 
 # Enable Galaxy administrator user creation.
-laniakea_create_galaxy_admin: true
+create_galaxy_admin: true
 
 # Galaxy administrator username
 GALAXY_ADMIN_USERNAME: "galaxy_admin_username"
@@ -36,38 +36,16 @@ galaxy_config_style: yaml
 galaxy_config_file: /home/galaxy/config/galaxy.yml
 galaxy_dynamic_job_rules_dir: "{{ galaxy_server_dir }}/lib/galaxy/jobs/rules"
 
-# Galaxy userdata are stored here
-laniakea_export_dir: "/export"
-
-# Tool dependency directory
-laniakea_tool_deps_path: "{{ export_dir }}/tool_deps"
-
-# Conda configuration
-#laniakea_conda_prefix: "{{ tool_deps_path }}/_conda"
-#laniakea_conda_channels: "iuc,bioconda,r,defaults,conda-forge"
-
 # Update UCSC genome database
-laniakea_update_ucsc: true
-laniakea_fast_update: true # Force database update by copying cached files. Only for testing!
+update_ucsc: true
+fast_update: true # Force database update by copying cached files. Only for testing!
 
 # Enable pbkdf2
-laniakea_use_pbkdf2: true
-
-# Galaxy login
-#laniakea_require_login: "True"
-#laniakea_allow_user_creation: "False"
-#laniakea_allow_user_impersonation: "True"
-#laniakea_new_user_dataset_access_role_default_private: "True"
+use_pbkdf2: true
 
 #______________________________________
 # Postgres database details
 laniakea_postgresql_version: 10
-#laniakea_galaxy_db_dir: "{{export_dir}}/galaxy/database"
-#laniakea_galaxy_db_port: 5432
-#laniakea_galaxy_db_passwd: 'galaxy'
-#laniakea_galaxy_database_connection: 'postgresql://{{ galaxy_user }}:{{ galaxy_db_passwd }}@localhost:{{ galaxy_db_port }}/{{ galaxy_user }}'
-#laniakea_galaxy_install_database_connection: 'postgresql://{{ galaxy_user }}:{{ galaxy_db_passwd }}@localhost:{{ galaxy_db_port }}/galaxy_tools'
-#laniakea_set_pgsql_random_password: true
 galaxy_postgresql_objects_users: 
   - name: galaxy
 galaxy_postgresql_objects_databases:
@@ -76,23 +54,7 @@ galaxy_postgresql_objects_databases:
 
 #______________________________________
 # NGINX
-#laniakea_nginx_upload_store_path: "{{galaxy_db_dir}}/tmp/nginx_upload_store"
-laniakea_nginx_https: false
-#laniakea_ssl_cert: /etc/certs/cert.pem
-#laniakea_ssl_key: /etc/certs/key.pem
-#laniakea_ssl_dhparam: /etc/certs/dhparam.pem
-
-#______________________________________
-# PROFTPD
-laniakea_proftpd_welcome: "galaxy ftp server"
-laniakea_proftpd_conf_path: "/etc/proftpd.conf"
-laniakea_proftpd_db_user: "galaxyftp"
-laniakea_proftpd_db_passwd: 'galaxy'
-laniakea_proftpd_files_path: "{{galaxy_db_dir}}/ftp"
-laniakea_proftpd_ftp_port: 21
-laniakea_proftpd_passive_port_low: 30000
-laniakea_proftpd_passive_port_high: 30009
-laniakea_set_proftpd_random_password: true
+nginx_https: false
 
 #______________________________________
 # Init system
@@ -111,13 +73,13 @@ laniakea_set_proftpd_random_password: true
 # If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
 # Facts needs to be gathered!
 
-laniakea_enable_storage_advanced_options: false
+enable_storage_advanced_options: false
 
 #______________________________________
 # Inform the role if galaxy tools and reference data will be installed
 # If yes, galaxy is not started
-laniakea_galaxy_flavor: 'galaxy-no-tools'
-laniakea_get_refdata: false
+galaxy_flavor: 'galaxy-no-tools'
+get_refdata: false
 
 #______________________________________
 # Certbot

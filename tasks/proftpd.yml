@@ -1,0 +1,20 @@
+---
+
+- name: Include proftpd role
+  include_role:
+    name: galaxyproject.proftpd
+  vars:
+    proftp_options:
+      - User: galaxy
+      - Group: galaxy
+    proftpd_sql_db: galaxy@/var/run/postgresql
+    proftpd_sql_user: galaxy
+    proftpd_welcome: "galaxy ftp server"
+    proftpd_conf_path: "/etc/proftpd.conf"
+    proftpd_db_user: "galaxyftp"
+    proftpd_db_passwd: 'galaxy'
+    proftpd_files_path: "{{galaxy_db_dir}}/ftp"
+    proftpd_ftp_port: 21
+    proftpd_passive_port_low: 30000
+    proftpd_passive_port_high: 30009
+    set_proftpd_random_password: true

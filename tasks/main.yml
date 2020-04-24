@@ -17,7 +17,7 @@
     pip_package: python3-pip
 
 - name: Include galaxy role
-  import_tasks: galaxyproject_galaxy.yml
+  import_tasks: install_galaxy.yml
 
 - name: Include miniconda role
   import_tasks: miniconda.yml
@@ -27,6 +27,9 @@
 
 - name: Include nginx role
   import_tasks: nginx.yml
+
+- name: Include proftpd role
+  import_tasks: proftpd.yml
 
 - name: Change owner Galaxy dir
   file:
