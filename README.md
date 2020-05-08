@@ -2,7 +2,7 @@
 
 Ansible Role to install Galaxy 20.01
 
-Minimal playbook:
+Minimal playbook:       
 	---
 
 	- hosts: galaxyservers
