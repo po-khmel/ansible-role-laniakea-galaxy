@@ -38,3 +38,6 @@
     recurse: yes
     owner: galaxy
     group: galaxy
+
+- name: create bootstrap user
+  include: create_ga_us.yml
