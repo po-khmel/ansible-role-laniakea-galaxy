@@ -19,7 +19,7 @@
   become: true
   become_user: galaxy
   shell:
-    cmd: . "{{ galaxy_venv_dir }}"/bin/activate ; python  py3_manage_bootstrap_user.py -c "{{ galaxy_server_dir }}"/config/galaxy.yml create -u "{{ GALAXY_ADMIN_USERNAME }}" -e "{{ GALAXY_ADMIN_EMAIL }}" -p "{{ GALAXY_ADMIN_PASSWORD }}" -a "{{ GALAXY_ADMIN_API_KEY }}"
+    cmd: . "{{ galaxy_venv_dir }}"/bin/activate ; python  py3_manage_bootstrap_user.py -c "{{ galaxy_config_dir }}"/galaxy.yml create -u "{{ GALAXY_ADMIN_USERNAME }}" -e "{{ GALAXY_ADMIN_EMAIL }}" -p "{{ GALAXY_ADMIN_PASSWORD }}" -a "{{ GALAXY_ADMIN_API_KEY }}"
     chdir: "{{ galaxy_server_dir }}"
   when: result.query_result[0].exists == false
 
