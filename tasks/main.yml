@@ -31,13 +31,5 @@
 #- name: Include proftpd role
 #  import_tasks: proftpd.yml
 
-#- name: Change owner Galaxy dir
-#  file:
-#    path: /home/galaxy
-#    state: directory
-#    recurse: yes
-#    owner: galaxy
-#    group: galaxy
-
 - name: create bootstrap user
   include: create_ga_us.yml
