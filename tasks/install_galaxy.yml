@@ -8,15 +8,13 @@
     galaxy_create_user: true
     galaxy_force_checkout: true
     galaxy_separate_privileges: yes
-    galaxy_privsep_user: galaxy
-    galaxy_group: galaxy
     galaxy_manage_paths: true
     galaxy_layout: root-dir
     galaxy_user: {name: galaxy, shell: /bin/bash}
-    galaxy_root: /home/galaxy
+    galaxy_root: '/home/galaxy/galaxy'
+    galaxy_mutable_config_dir: '/home/galaxy/galaxy/config'
     galaxy_commit_id: release_20.01
     galaxy_config_style: yaml
-    galaxy_config_file: "/home/galaxy/config/galaxy.yml"
     #change path
     galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
     galaxy_config_dir: "{{ laniakea_galaxy_config_dir }}"
