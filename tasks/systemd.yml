@@ -9,3 +9,4 @@
     galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}"
     galaxy_config_dir: "{{ laniakea_galaxy_config_dir }}" 
     galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
+    galaxy_config_file: "{{ laniakea_galaxy_config_dir }}/galaxy.yml"

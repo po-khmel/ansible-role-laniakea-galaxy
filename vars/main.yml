@@ -3,6 +3,6 @@
 ansible_python_interpreter: /usr/bin/python3
 
 #laniakea configuration
-laniakea_galaxy_venv_dir: /home/galaxy/.venv
-laniakea_galaxy_server_dir: /home/galaxy/galaxy
-laniakea_galaxy_config_dir: /home/galaxy/config
+laniakea_galaxy_venv_dir: /home/galaxy/galaxy/venv
+laniakea_galaxy_server_dir: /home/galaxy/galaxy/server
+laniakea_galaxy_config_dir: /home/galaxy/galaxy/config

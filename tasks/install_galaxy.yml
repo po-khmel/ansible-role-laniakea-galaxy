@@ -11,14 +11,17 @@
     galaxy_manage_paths: true
     galaxy_layout: root-dir
     galaxy_user: {name: galaxy, shell: /bin/bash}
+    #configuration1: no privsep_user no task "adding www-data to galaxy group"
     galaxy_root: '/home/galaxy/galaxy'
     galaxy_mutable_config_dir: '/home/galaxy/galaxy/config'
+    #config1 end
+    galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
     galaxy_commit_id: release_20.01
     galaxy_config_style: yaml
     #change path
-    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
-    galaxy_config_dir: "{{ laniakea_galaxy_config_dir }}"
-    galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
+#    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
+#    galaxy_config_dir: "{{ laniakea_galaxy_config_dir }}"
+#    galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
     galaxy_config:
       galaxy:
         brand: "My Galaxy"
@@ -78,11 +81,17 @@
         logto: /tmp/uwsgi.log
         no-orphans: true
 
-# added to run galaxy when the galaxy files are owned by galaxy user
-- name: adding www-data to galaxy group
-  user:
-    name: www-data
-    group: galaxy 
+## config2: run galaxy in order to have galaxy files owned by galaxy user
+#   1) comment config1 variables 
+#   2) and add to the task Include galaxy role
+#   	galaxy_privsep_user: galaxy
+#   	galaxy_group: galaxy
+#   3) add the task "adding www-data to galaxy group 
+#
+#- name: adding www-data to galaxy group
+#  user:
+#    name: www-data
+#    group: galaxy 
     
 
 
