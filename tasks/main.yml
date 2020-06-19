@@ -28,8 +28,8 @@
 - name: Include nginx role
   import_tasks: nginx.yml
 
-#- name: Include proftpd role
-#  import_tasks: proftpd.yml
+- name: Include proftpd role
+  import_tasks: proftpd.yml
 
 - name: create bootstrap user
   include: create_ga_us.yml
