@@ -1,11 +1,13 @@
 ---
 
-- name: Install Dependencies
+- name: Install Galaxy Dependencies
   package:
     name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
+
 - name: Install nginx-extras repository
   apt_repository:
     repo: ppa:galaxyproject/nginx
+
 - name: '[Ubuntu] Prevent nginx update from Ubuntu repository'
   copy:
     src: 'galaxyproject-nginx-pin-700'

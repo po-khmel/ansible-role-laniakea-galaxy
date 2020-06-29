@@ -12,11 +12,11 @@
     galaxy_layout: root-dir
     galaxy_user: {name: galaxy, shell: /bin/bash}
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
-    galaxy_root: '/home/galaxy/galaxy'
-    galaxy_mutable_config_dir: '/home/galaxy/galaxy/config'
+    galaxy_root: '{{ galaxy_install_path }}'
+    galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
     #config1 end
-    galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
-    galaxy_commit_id: release_20.01
+    galaxy_config_file: '{{ galaxy_mutable_config_dir }}/galaxy.yml'
+    galaxy_commit_id: "{{ GALAXY_VERSION }}"
     galaxy_config_style: yaml
     #change path
 #    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
@@ -24,7 +24,7 @@
 #    galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
     galaxy_config:
       galaxy:
-        brand: "My Galaxy"
+        brand: "{{ galaxy_instance_description }}"
         admin_users: "{{ GALAXY_ADMIN_EMAIL }}"
         admin_email: "{{ GALAXY_ADMIN_EMAIL }}"
         admin_username: "{{ GALAXY_ADMIN_USERNAME }}"
@@ -51,7 +51,7 @@
         allow_user_impersonation: "True"
         new_user_dataset_access_role_default_private: "True"
         ftp_upload_dir: /export/galaxy/database/ftp
-        ftp_upload_site: ftp://90.147.188.111
+        ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
       uwsgi:
         socket: 127.0.0.1:4001

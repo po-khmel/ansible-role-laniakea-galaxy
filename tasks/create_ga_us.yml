@@ -1,6 +1,6 @@
 ---
 
-- name: query database for API_KEY
+- name: Query database for user API_KEY 
   become: true
   become_user: postgres
   postgresql_query:
@@ -9,13 +9,13 @@
     query:  SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
   register: result
 
-- name: download user creation script 
+- name: Download user creation script 
   get_url:
     url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
     dest: "{{ laniakea_galaxy_server_dir }}/py3_manage_bootstrap_user.py"
   when: result.query_result[0].exists == false
 
-- name: create galaxy user with API_KEY to install tools
+- name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
   shell:

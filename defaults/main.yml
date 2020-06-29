@@ -31,8 +31,20 @@ GALAXY_ADMIN_EMAIL: "admin@server.com"
 
 export_dir: "/export"
 galaxy_user: {name: galaxy, shell: /bin/bash}
-galaxy_root: /home/galaxy
-galaxy_commit_id: release_20.01
+#galaxycloud variable
+galaxy_FS_path: /home/galaxy
+#galaxy_root: /home/galaxy
+
+#!galaxyclod variable
+GALAXY_VERSION: release_20.01
+#galaxy_commit_id: "{{ GALAXY_VERSION }}"
+
+#!galaxycloud variable
+galaxy_instance_description: "ELIXIR-IT"
+galaxy_directory: galaxy
+galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
+#!
+
 galaxy_config_style: yaml
 galaxy_config_file: /home/galaxy/config/galaxy.yml
 galaxy_dynamic_job_rules_dir: "{{ galaxy_server_dir }}/lib/galaxy/jobs/rules"
@@ -103,3 +115,6 @@ certbot_agree_tos: --agree-tos
 #_____________________________________
 # Systemd
 galaxy_restart_handler_name: "Restart Galaxy"
+
+
+
