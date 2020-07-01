@@ -3,6 +3,7 @@
 - name: Include galaxy role
   include_role:
     name: galaxyproject.galaxy
+    public: true
   vars:
     pip_virtualenv_command: /usr/bin/python3 -m virtualenv
     galaxy_create_user: true
@@ -10,7 +11,8 @@
     galaxy_separate_privileges: yes
     galaxy_manage_paths: true
     galaxy_layout: root-dir
-    galaxy_user: {name: galaxy, shell: /bin/bash}
+    #galaxy_user: {name: galaxy, shell: /bin/bash}
+    galaxy_user: '{{ LA_galaxy_user }}' 
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
     galaxy_root: '{{ galaxy_install_path }}'
     galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
