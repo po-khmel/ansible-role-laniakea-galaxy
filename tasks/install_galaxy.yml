@@ -56,8 +56,9 @@
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
         #release_20.05 variables
-        tool_search_index_dir: /export/galaxy/database/tool_search_index_dir
-        tool_cache_data_dir: /export/galaxy/database/tool_cache
+        tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if galaxy_commit_id == 'release_20.05' else omit }}"
+        tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache' if galaxy_commit_id == 'release_20.05' else omit }}"
+
       uwsgi:
         socket: 127.0.0.1:4001
         buffer-size: 16384
