@@ -55,6 +55,9 @@
         ftp_upload_dir: /export/galaxy/database/ftp
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
+        #release_20.05 variables
+        tool_search_index_dir: /export/galaxy/database/tool_search_index_dir
+        tool_cache_data_dir: /export/galaxy/database/tool_cache
       uwsgi:
         socket: 127.0.0.1:4001
         buffer-size: 16384
