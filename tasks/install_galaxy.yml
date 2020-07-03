@@ -56,8 +56,8 @@
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
         #release_20.05 variables
-        tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if galaxy_commit_id == 'release_20.05' else omit }}"
-        tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache' if galaxy_commit_id == 'release_20.05' else omit }}"
+        tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
+        tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
 
       uwsgi:
         socket: 127.0.0.1:4001
@@ -87,6 +87,7 @@
         logto: /tmp/uwsgi.log
         no-orphans: true
 
+
 ## config2: run galaxy in order to have galaxy files owned by galaxy user
 #   1) comment config1 variables 
 #   2) and add to the task Include galaxy role
@@ -99,8 +100,16 @@
 #    name: www-data
 #    group: galaxy 
     
-
-
+#- name: debug variables 
+#  debug:
+#    var: '{{ tool_search_index_dir }}' 
+#  ignore_errors: yes
+#
+#
+#- name: debug variables  
+#  debug:
+#    var: '{{ tool_cache_data_dir }}' 
+#  ignore_errors: yes
 
 
 
