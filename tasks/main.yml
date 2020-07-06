@@ -19,8 +19,10 @@
 - name: Include galaxy role
   import_tasks: install_galaxy.yml
 
-- name: Include miniconda role
+- name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
+  become: yes
+  become_user: galaxy
 
 - name: Include systemd role
   import_tasks: systemd.yml
