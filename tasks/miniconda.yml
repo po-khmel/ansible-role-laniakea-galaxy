@@ -3,6 +3,14 @@
 - name: Include miniconda role
   include_role:
     name: uchida.miniconda
+    public: true 
   vars:
     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
     miniconda_version: "4.6.14"
+
+- name: resolve permission problem without affecting miniconda role
+  file:
+    path: "{{ miniconda_prefix }}" 
+    owner: galaxy
+    group: galaxy
+    recurse: yes
