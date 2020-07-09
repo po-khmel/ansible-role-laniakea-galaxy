@@ -15,3 +15,11 @@
   become_user: root
   become_method: sudo
   when: ansible_os_family == "Debian"
+
+- name: 'User rules for {{ LA_galaxy_user.name }} to allow no passwd for sudo'
+  lineinfile:
+    dest: '/etc/sudoers'
+    state: present
+    line: '{{ LA_galaxy_user.name }} ALL=(ALL) NOPASSWD:ALL'
+    insertafter: EOF
+
