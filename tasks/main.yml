@@ -32,6 +32,8 @@
 
 - name: Include proftpd role
   import_tasks: proftpd.yml
+  become: yes
+  become_user: root
 
 - name: create bootstrap user
   include: create_ga_us.yml
