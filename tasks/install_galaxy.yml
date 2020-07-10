@@ -55,6 +55,8 @@
         ftp_upload_dir: /export/galaxy/database/ftp
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
+        #zerg config
+        job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
         tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
         tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 

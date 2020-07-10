@@ -35,5 +35,10 @@
   become: yes
   become_user: root
 
+- name: job conf config
+  import_tasks: job_conf.yml
+  become: yes 
+  become_user: root
+
 - name: create bootstrap user
   include: create_ga_us.yml
