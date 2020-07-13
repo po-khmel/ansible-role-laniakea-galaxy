@@ -35,10 +35,10 @@
   become: yes
   become_user: root
 
-- name: job conf config
+- name: set default laniakea job conf 
   import_tasks: job_conf.yml
   become: yes 
   become_user: root
 
-- name: create bootstrap user
-  include: create_ga_us.yml
+- name: create admin user
+  include: admin_user.yml

@@ -1,11 +1,10 @@
 ---
-
-
 # Galaxy instance description
 galaxy_instance_description: "ELIXIR-IT"
 
 # User to launch the Galaxy portal
 LA_galaxy_user: {name: galaxy, shell: /bin/bash}
+        
 #! add GUID
 
 # Path to install the Galaxy software
@@ -22,10 +21,10 @@ galaxy_config_style: yaml
 galaxy_config_file: /home/galaxy/config/galaxy.yml
 
 # Galaxy version to install
-GALAXY_VERSION: release_20.01
+GALAXY_VERSION: release_20.05
 
-# Galaxy instance ssh public key
-galaxy_instance_key_pub: ""
+# Galaxy instance ssh public key commented used by previous role
+#galaxy_instance_key_pub: ""
 
 # Galaxy virtual elastic cluster support: Currently supported local and slurm
 galaxy_lrms: local
@@ -146,5 +145,12 @@ certbot_agree_tos: --agree-tos
 
 galaxy_restart_handler_name: "Restart Galaxy"
 
+#_____________________________________
+# Job_conf variables
+galaxy_workers: 4
+galaxy_local_slot: 2
+galaxy_registered_concurrent_jobs: 2
+galaxy_unregistered_concurrent_jobs: 0
+galaxy_instance_codename: galaxy
 
 

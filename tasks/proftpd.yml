@@ -19,7 +19,6 @@
     proftpd_passive_port_low: 30000
     proftpd_passive_port_high: 30009
     set_proftpd_random_password: true
-    # adding variables
     proftpd_galaxy_auth: yes
     galaxy_ftp_upload_dir: /export/galaxy/database/ftp
 
