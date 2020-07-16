@@ -55,6 +55,7 @@
         ftp_upload_dir: /export/galaxy/database/ftp
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
+        conda_auto_install: true
         #zerg config
         job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
