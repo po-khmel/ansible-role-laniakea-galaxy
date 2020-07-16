@@ -84,7 +84,7 @@
           - unix_signal:15 gracefully_kill_them_all
         py-call-osafterfork: true
         enable-threads: true
-        #stats: 127.0.0.1:4010
+        stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
         zerg: /home/galaxy/galaxy/var/zergpool.sock
