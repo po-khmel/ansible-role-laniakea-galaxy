@@ -2,8 +2,10 @@
 
 - name: Include systemd role
   include_role:
-    name: usegalaxy_eu.galaxy_systemd
+    name: ansible-galaxy-systemd  
   vars:
     galaxy_systemd_handler_env: ""
     galaxy_systemd_workflow_scheduler_env: ""
     galaxy_systemd_handlers: 4
+    galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
+    galaxy_systemd_zergling_uwsgi_config_style: yaml

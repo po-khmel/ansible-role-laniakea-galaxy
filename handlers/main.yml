@@ -2,5 +2,5 @@
 
 - name: Restart Galaxy
   systemd:
-    name: galaxy
+    name: galaxy-zergpool
     state: restarted
