@@ -50,8 +50,11 @@ Example Playbook
 
 License
 -------
+Apache Licence v2
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 
 Author Information
 ------------------
-
+Pietro Mandreoli email: pietro.mandreoli@unimi.it
