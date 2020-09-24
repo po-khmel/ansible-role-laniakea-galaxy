@@ -11,6 +11,8 @@
     galaxy_separate_privileges: yes
     galaxy_manage_paths: true
     galaxy_layout: root-dir
+    #add for root:root permessi
+    galaxy_privsep_user: galaxy
     #galaxy_user: {name: galaxy, shell: /bin/bash}
     galaxy_user: '{{ LA_galaxy_user }}' 
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
@@ -88,7 +90,7 @@
         stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
-        zerg: /home/galaxy/galaxy/var/zergpool.sock
+        #zerg: /home/galaxy/galaxy/var/zergpool.sock
 
 
 #- name: adding nginx to galaxy group

@@ -1,5 +1,30 @@
 ---
 
+#- name: Query database for user API_KEY 
+#  become: true
+#  become_user: postgres
+#  postgresql_query:
+#    db: galaxy
+#    login_user: postgres
+#    query:  SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
+#  register: result
+#  when: ansible_os_family == "Debian"
+#  
+#
+#- name: Download user creation script 
+#  get_url:
+#    url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
+#    dest: "{{ laniakea_galaxy_server_dir }}/py3_manage_bootstrap_user.py"
+#  when: result.query_result[0].exists == "false" and ansible_os_family == "Debian"
+#
+#- name: Create galaxy user with API_KEY to install tools
+#  become: true
+#  become_user: galaxy
+#  shell:
+#    cmd: . "{{ laniakea_galaxy_venv_dir }}"/bin/activate ; python  py3_manage_bootstrap_user.py -c "{{ laniakea_galaxy_config_dir }}"/galaxy.yml create -u "{{ GALAXY_ADMIN_USERNAME }}" -e "{{ GALAXY_ADMIN_EMAIL }}" -p "{{ GALAXY_ADMIN_PASSWORD }}" -a "{{ GALAXY_ADMIN_API_KEY }}"
+#    chdir: "{{ laniakea_galaxy_server_dir }}"
+#  when: result.query_result[0].exists == "false" and ansible_os_family == "Debian"
+
 - name: Query database for user API_KEY 
   become: true
   become_user: postgres
@@ -8,18 +33,18 @@
     login_user: postgres
     query:  SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
   register: result
+  
 
 - name: Download user creation script 
   get_url:
-    url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
-    dest: "{{ laniakea_galaxy_server_dir }}/py3_manage_bootstrap_user.py"
-  when: result.query_result[0].exists == false
+    url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/master/galaxy_tools/manage_galaxy_bootstrap_user.py 
+    dest: "{{ laniakea_galaxy_server_dir }}/manage_bootstrap_user.py"
+  when: result.query_result[0].exists == false 
 
 - name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
   shell:
-    cmd: . "{{ laniakea_galaxy_venv_dir }}"/bin/activate ; python  py3_manage_bootstrap_user.py -c "{{ laniakea_galaxy_config_dir }}"/galaxy.yml create -u "{{ GALAXY_ADMIN_USERNAME }}" -e "{{ GALAXY_ADMIN_EMAIL }}" -p "{{ GALAXY_ADMIN_PASSWORD }}" -a "{{ GALAXY_ADMIN_API_KEY }}"
+    cmd: . "{{ laniakea_galaxy_venv_dir }}"/bin/activate ; python  manage_bootstrap_user.py -c "{{ laniakea_galaxy_config_dir }}"/galaxy.yml create -u "{{ GALAXY_ADMIN_USERNAME }}" -e "{{ GALAXY_ADMIN_EMAIL }}" -p "{{ GALAXY_ADMIN_PASSWORD }}" -a "{{ GALAXY_ADMIN_API_KEY }}"
     chdir: "{{ laniakea_galaxy_server_dir }}"
-  when: result.query_result[0].exists == false
-
+  when: result.query_result[0].exists == "false" 

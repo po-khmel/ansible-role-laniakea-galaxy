@@ -3,10 +3,21 @@
 - name: Install Galaxy Dependencies
   package:
     name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
+  when: ansible_os_family == "Debian"
+
+- name: Install Galaxy Dependencies [centos]
+  package:
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python']
+  vars:
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat"
+  
+
 
 - name: Install nginx-extras repository
   apt_repository:
     repo: ppa:galaxyproject/nginx
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: '[Ubuntu] Prevent nginx update from Ubuntu repository'
   copy:
@@ -22,4 +33,6 @@
     state: present
     line: '{{ LA_galaxy_user.name }} ALL=(ALL) NOPASSWD:ALL'
     insertafter: EOF
+  vars:
+   ansible_python_interpreter: /usr/bin/python
 

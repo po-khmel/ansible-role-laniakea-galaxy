@@ -3,6 +3,7 @@
 - name: Install nginx dependencies
   apt:
     pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: Create tmp dir
   file:
@@ -17,8 +18,30 @@
     state: directory
     owner: www-data
     group: galaxy
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
-- name: Include nginx role
+- name: make a new user
+  user: 
+    name: nginx
+    state: present
+    group: galaxy
+  when: ansible_os_family == "RedHat" 
+
+#- name: Create nginx_upload_store dir
+#  file:
+#    path: /export/galaxy/database/tmp/nginx_upload_store
+#    state: directory
+#    owner: www-data
+#    group: galaxy
+#  when: ansible_os_family == "RedHat" 
+
+- name: '[EL] Add NGINX repository'
+  command: 'yum-config-manager --add-repo https://depot.galaxyproject.org/yum/galaxy.repo'
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "RedHat"
+
+- name: Include nginx role [ubuntu]
   include_role:
     name: galaxyproject.nginx
   vars:
@@ -30,3 +53,21 @@
     nginx_conf_http:
       client_max_body_size: 1g
     galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+- name: Include nginx role [centos]
+  include_role:
+    name: galaxyproject.nginx
+  vars:
+    nginx_selinux_allow_local_connections: true
+    nginx_flavor: galaxy
+    nginx_servers:
+      - galaxy
+    nginx_enable_default_server: false
+    nginx_conf_http:
+      client_max_body_size: 1g
+    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
+    ansible_python_interpreter: /usr/bin/python
+    nginx_conf_user: galaxy
+    nginx_conf_group: galaxy
+  when: ansible_os_family == "RedHat" 

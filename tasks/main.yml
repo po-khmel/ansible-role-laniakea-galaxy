@@ -2,27 +2,95 @@
 
 - name: Install dependencies 
   import_tasks: pre-tasks.yml
- 
-- name: Include postgresql role
+
+- name: Include postgresql role [centos]
   include_role:
     name: galaxyproject.postgresql
+  vars: 
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
+ 
+- name: Include postgresql role [centos]
+  include_role:
+    name: galaxyproject.postgresql
+  when: ansible_os_family == "Debian"
 
-- name: Include natefoo role
+- name: Include natefoo role [centos]
   import_tasks: postgresql_objects.yml
+  vars: 
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
 
-- name: Include geerlingguy role
+- name: Include natefoo role [ubuntu]
+  import_tasks: postgresql_objects.yml
+  when: ansible_os_family == "Debian"
+
+- name: Include geerlingguy role [centos]
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_package: python-pip
+    ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
+
+- name: Include geerlingguy role [ubuntu]
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python3-pip
+  when: ansible_os_family == "Debian"
 
 - name: Include galaxy role
   import_tasks: install_galaxy.yml
+  when: ansible_os_family == "Debian"
+
+- name: Include galaxy role
+  import_tasks: install_galaxy_Centos.yml
+  when: ansible_os_family == "RedHat"
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
   become: yes
   become_user: galaxy
+  when: ansible_os_family == "Debian"
+
+- name: Include miniconda role run by galaxy user
+  import_tasks: miniconda.yml
+  become: yes
+  become_user: galaxy
+  vars: 
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
+
+- name: Include systemd role
+  import_tasks: systemd.yml
+
+- name: Include nginx role
+  import_tasks: nginx.yml
+
+- name: Include proftpd role
+  import_tasks: proftpd.yml
+  become: yes
+  become_user: root
+  when: ansible_os_family == "Debian"
+
+- name: Include proftpd role
+  import_tasks: proftpd.yml
+  become: yes
+
+- name: Include miniconda role run by galaxy user
+  import_tasks: miniconda.yml
+  become: yes
+  become_user: galaxy
+  when: ansible_os_family == "Debian"
+
+- name: Include miniconda role run by galaxy user
+  import_tasks: miniconda.yml
+  become: yes
+  become_user: galaxy
+  vars: 
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
 
 - name: Include systemd role
   import_tasks: systemd.yml
@@ -42,3 +110,7 @@
 
 - name: create admin user
   include: admin_user.yml
+  vars: 
+   ansible_python_interpreter: /usr/bin/python
+  when: ansible_os_family == "RedHat" 
+
