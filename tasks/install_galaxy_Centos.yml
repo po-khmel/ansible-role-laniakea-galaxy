@@ -5,7 +5,7 @@
     name: galaxyproject.galaxy
     public: true
   vars:
-    pip_virtualenv_command: /usr/bin/python3 -m virtualenv
+    pip_virtualenv_command: /usr/bin/python -m virtualenv
     galaxy_create_user: true
     galaxy_force_checkout: true
     galaxy_separate_privileges: yes
@@ -59,7 +59,7 @@
         conda_prefix: /export/tool_deps/_conda
         conda_auto_install: true
         #zerg config
-        job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+        #job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
         tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
         tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
@@ -91,29 +91,6 @@
         logto: /tmp/uwsgi.log
         no-orphans: true
         #zerg: /home/galaxy/galaxy/var/zergpool.sock
-
-
-#- name: adding nginx to galaxy group
-#  user:
-#    name: nginx
-#    group: galaxy 
-#  when: ansible_os_family == "CentOS"
-    
-#- name: debug variables 
-#  debug:
-#    var: '{{ tool_search_index_dir }}' 
-#  ignore_errors: yes
-#
-#
-#- name: debug variables  
-#  debug:
-#    var: '{{ tool_cache_data_dir }}' 
-#  ignore_errors: yes
-
-
-
-
-
-
-
+        mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
+        farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
 
