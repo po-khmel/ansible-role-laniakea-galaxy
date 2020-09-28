@@ -90,7 +90,7 @@
         stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
-        #zerg: /home/galaxy/galaxy/var/zergpool.sock
+        #zerg: "{{ '/home/galaxy/galaxy/var/zergpool.sock' if (uwsgi_mode == 'zerg') else omit }}"
         mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
         farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
 

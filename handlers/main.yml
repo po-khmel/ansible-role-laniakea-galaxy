@@ -2,5 +2,5 @@
 
 - name: Restart Galaxy
   systemd:
-    name: galaxy-zergpool
+    name: "{{ 'galaxy' if (uwsgi_mode == 'mule') else 'galaxy-zergpool'}}"
     state: restarted
