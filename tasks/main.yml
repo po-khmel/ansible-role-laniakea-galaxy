@@ -1,26 +1,44 @@
 ---
 
+- include_vars: vars-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
 - name: Install dependencies 
   import_tasks: pre-tasks.yml
- 
+
 - name: Include postgresql role
   include_role:
     name: galaxyproject.postgresql
 
-- name: Include natefoo role
+- name: Include natefoo role 
   import_tasks: postgresql_objects.yml
 
-- name: Include geerlingguy role
+- name: Include geerlingguy role 
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_package: python-pip
+  when: ansible_os_family == "RedHat" 
+
+- name: Include geerlingguy role [ubuntu]
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python3-pip
+  when: ansible_os_family == "Debian"
 
 - name: Include galaxy role
   import_tasks: install_galaxy.yml
+  when: ansible_os_family == "Debian"
 
-- name: Include miniconda role
+- name: Include galaxy role
+  import_tasks: install_galaxy_Centos.yml
+  when: ansible_os_family == "RedHat"
+
+- name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
+  become: yes
+  become_user: galaxy
 
 - name: Include systemd role
   import_tasks: systemd.yml
@@ -28,16 +46,18 @@
 - name: Include nginx role
   import_tasks: nginx.yml
 
-#- name: Include proftpd role
-#  import_tasks: proftpd.yml
+- name: Include proftpd role
+  import_tasks: proftpd.yml
+  become: yes
+  become_user: root
 
-#- name: Change owner Galaxy dir
-#  file:
-#    path: /home/galaxy
-#    state: directory
-#    recurse: yes
-#    owner: galaxy
-#    group: galaxy
+- name: set default laniakea job conf 
+  import_tasks: job_conf.yml
+  become: yes 
+  become_user: galaxy
+  when: uwsgi_mode == "zerg"
 
-- name: create bootstrap user
-  include: create_ga_us.yml
+- name: create admin user
+  include: admin_user.yml
+  when: ansible_os_family == "RedHat" 
+

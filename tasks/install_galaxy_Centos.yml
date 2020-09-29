@@ -11,6 +11,8 @@
     galaxy_separate_privileges: yes
     galaxy_manage_paths: true
     galaxy_layout: root-dir
+    #add for root:root permessi
+    galaxy_privsep_user: galaxy
     #galaxy_user: {name: galaxy, shell: /bin/bash}
     galaxy_user: '{{ LA_galaxy_user }}' 
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
@@ -57,7 +59,7 @@
         conda_prefix: /export/tool_deps/_conda
         conda_auto_install: true
         #zerg config
-        job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+        #job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
         tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
         tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
@@ -88,32 +90,7 @@
         stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
-        #zerg: /home/galaxy/galaxy/var/zergpool.sock
+        #zerg: "{{ '/home/galaxy/galaxy/var/zergpool.sock' if (uwsgi_mode == 'zerg') else omit }}"
         mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
         farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
-
-
-#- name: adding nginx to galaxy group
-#  user:
-#    name: nginx
-#    group: galaxy 
-#  when: ansible_os_family == "CentOS"
-    
-#- name: debug variables 
-#  debug:
-#    var: '{{ tool_search_index_dir }}' 
-#  ignore_errors: yes
-#
-#
-#- name: debug variables  
-#  debug:
-#    var: '{{ tool_cache_data_dir }}' 
-#  ignore_errors: yes
-
-
-
-
-
-
-
 

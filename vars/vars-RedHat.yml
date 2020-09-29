@@ -1,0 +1,5 @@
+---
+
+ansible_python_interpreter: /usr/bin/python
+pip_package: python-pip
+

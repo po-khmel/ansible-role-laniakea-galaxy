@@ -1,6 +1,6 @@
 ---
 
-- name: Include natefoo role
+- name: Include natefoo postgresql role
   include_role:
     name: natefoo.postgresql_objects
     apply:
