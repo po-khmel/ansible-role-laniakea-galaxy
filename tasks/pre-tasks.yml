@@ -7,12 +7,16 @@
 
 - name: Install Galaxy Dependencies [centos]
   package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python']
-  vars:
-   ansible_python_interpreter: /usr/bin/python
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2']
   when: ansible_os_family == "RedHat"
-  
 
+- name: Install virtualenv for pytho3 [centos]
+  command: /usr/bin/pip3 install virtualenv 
+  when: ansible_os_family == "RedHat"
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
 
 - name: Install nginx-extras repository
   apt_repository:

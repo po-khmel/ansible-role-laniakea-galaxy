@@ -5,7 +5,7 @@
     name: galaxyproject.galaxy
     public: true
   vars:
-    pip_virtualenv_command: /usr/bin/python -m virtualenv
+    pip_virtualenv_command: /usr/bin/python3 -m virtualenv
     galaxy_create_user: true
     galaxy_force_checkout: true
     galaxy_separate_privileges: yes
