@@ -17,6 +17,7 @@
 - name: Disable SELinux
   selinux:
     state: disabled
+  when: ansible_os_family == "RedHat"
 
 - name: Install nginx-extras repository
   apt_repository:
