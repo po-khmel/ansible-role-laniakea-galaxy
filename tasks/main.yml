@@ -27,8 +27,13 @@
     pip_package: python3-pip
   when: ansible_os_family == "Debian"
 
-- name: Include galaxy role
-  include_tasks: install_galaxy_{{ ansible_os_family }}.yml
+- name: '[Ubuntu] Include galaxy role'
+  import_tasks: install_galaxy_Debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: '[EL] Include galaxy role'
+  import_tasks: install_galaxy_RedHat.yml
+  when: ansible_os_family == "RedHat"
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
