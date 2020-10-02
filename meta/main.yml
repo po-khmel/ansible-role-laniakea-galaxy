@@ -2,7 +2,7 @@ galaxy_info:
   author: Martina Alverà
   description: Install Galaxy workflow manager (production environment) on Ubuntu + postresql, nginx, uwsgi, proftpd
   company: Università degli Studi di Milano
-  role_name: ma_galaxy
+  role_name: galaxy
   min_ansible_version: 2.9
   platforms:
    - name: Ubuntu
