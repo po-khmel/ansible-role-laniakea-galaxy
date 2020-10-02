@@ -18,7 +18,7 @@
     galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
     #config1 end
     galaxy_config_file: '{{ galaxy_mutable_config_dir }}/galaxy.yml'
-    galaxy_commit_id: "{{ GALAXY_VERSION }}"
+    galaxy_commit_id: "{{ galaxy_version }}"
     galaxy_config_style: yaml
     #change path
 #    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
