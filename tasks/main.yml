@@ -28,12 +28,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Include galaxy role
-  import_tasks: install_galaxy.yml
-  when: ansible_os_family == "Debian"
-
-- name: Include galaxy role
-  import_tasks: install_galaxy_Centos.yml
-  when: ansible_os_family == "RedHat"
+  import_tasks: install_galaxy_{{ ansible_os_family }}.yml
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml

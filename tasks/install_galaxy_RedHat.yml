@@ -1,0 +1,96 @@
+
+
+- name: Include galaxy role
+  include_role:
+    name: galaxyproject.galaxy
+    public: true
+  vars:
+    pip_virtualenv_command: /usr/bin/python3 -m virtualenv
+    galaxy_create_user: true
+    galaxy_force_checkout: true
+    galaxy_separate_privileges: yes
+    galaxy_manage_paths: true
+    galaxy_layout: root-dir
+    #add for root:root permessi
+    galaxy_privsep_user: galaxy
+    #galaxy_user: {name: galaxy, shell: /bin/bash}
+    galaxy_user: '{{ LA_galaxy_user }}' 
+    #configuration1: no privsep_user no task "adding www-data to galaxy group"
+    galaxy_root: '{{ galaxy_install_path }}'
+    galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
+    #config1 end
+    galaxy_config_file: '{{ galaxy_mutable_config_dir }}/galaxy.yml'
+    galaxy_commit_id: "{{ galaxy_version }}"
+    galaxy_config_style: yaml
+    #change path
+#    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
+#    galaxy_config_dir: "{{ laniakea_galaxy_config_dir }}"
+#    galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
+    galaxy_config:
+      galaxy:
+        brand: "{{ galaxy_instance_description }}"
+        admin_users: "{{ GALAXY_ADMIN_EMAIL }}"
+        admin_email: "{{ GALAXY_ADMIN_EMAIL }}"
+        admin_username: "{{ GALAXY_ADMIN_USERNAME }}"
+        admin_password: "{{ GALAXY_ADMIN_PASSWORD }}"
+        master_api_key: "{{ GALAXY_ADMIN_API_KEY }}"
+        database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+        install_database_connection: "postgresql:///galaxy_tools?host=/var/run/postgresql"
+        job_working_directory: /export/galaxy/database/job_working_directory
+        file_path: /export/galaxy/database/files
+        new_file_path: /export/galaxy/database/tmp
+        check_migrate_tools: false
+        tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+        tool_dependency_dir: /export/tool_deps
+        template_cache_path: /export/galaxy/database/compiled_templates
+        citation_cache_data_dir: /export/galaxy/database/citations/data
+        citation_cache_lock_dir: /export/galaxy/database/citations/lock
+        whoosh_index_dir: /export/galaxy/database/whoosh_indexes
+        object_store_cache_path: /export/galaxy/database/object_store_cache
+        cluster_file_directory: /export/galaxy/database/pbs
+        nginx_upload_store: /export/galaxy/database/tmp/nginx_upload_store
+        nginx_upload_path: "/_upload"
+        require_login: "True"
+        allow_user_creation: "True"
+        allow_user_impersonation: "True"
+        new_user_dataset_access_role_default_private: "True"
+        ftp_upload_dir: /export/galaxy/database/ftp
+        ftp_upload_site: ftp://localhost
+        conda_prefix: /export/tool_deps/_conda
+        conda_auto_install: true
+        #zerg config
+        #job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+        #release_20.05 variables
+        tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
+        tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
+
+      uwsgi:
+        socket: 127.0.0.1:4001
+        buffer-size: 16384
+        processes: 3
+        threads: 4
+        offload-threads: 2
+        static-map:
+          - /static/style={{ galaxy_server_dir }}/static/style/blue
+          - /static={{ galaxy_server_dir }}/static
+          - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
+        static-safe: client/galaxy/images
+        master: true
+        virtualenv: "{{ galaxy_venv_dir }}"
+        pythonpath: "{{ galaxy_server_dir }}/lib"
+        module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+        manage-script-name: true
+        thunder-lock: true
+        die-on-term: true
+        hook-master-start:
+          - unix_signal:2 gracefully_kill_them_all
+          - unix_signal:15 gracefully_kill_them_all
+        py-call-osafterfork: true
+        enable-threads: true
+        stats: 127.0.0.1:4010
+        logto: /tmp/uwsgi.log
+        no-orphans: true
+        #zerg: "{{ '/home/galaxy/galaxy/var/zergpool.sock' if (uwsgi_mode == 'zerg') else omit }}"
+        mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
+        farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
+
