@@ -21,7 +21,7 @@ galaxy_config_style: yaml
 galaxy_config_file: /home/galaxy/config/galaxy.yml
 
 # Galaxy version to install
-GALAXY_VERSION: release_20.05
+galaxy_version: release_20.05
 
 # Galaxy instance ssh public key commented used by previous role
 #galaxy_instance_key_pub: ""
