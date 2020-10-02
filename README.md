@@ -1,23 +1,27 @@
-ansible-role-laniakea-galaxy
-============================
+Laniakea Galaxy
+===============
 
-Ansible role to install Galaxy 20.01 using roles developed by the Galaxy community.
-
+Ansible role to install Galaxy 20.05 using roles developed by the Galaxy community.
 
 Requirements
 ------------
 
 Required roles:
  
-- galaxyproject.galaxy
-- galaxyproject.nginx
-- galaxyproject.postgresql
-- galaxyproject.proftpd
-- geerlingguy.pip
-- natefoo.postgresql_objects
-- uchida.miniconda
-- usegalaxy_eu.certbot
-- usegalaxy_eu.galaxy_systemd
+- src: galaxyproject.galaxy
+  version: 0.9.6
+- src: galaxyproject.nginx
+  version: 0.6.4
+- src: galaxyproject.postgresql
+  version: 1.0.2
+- src: natefoo.postgresql_objects
+  version: 1.1
+- src: geerlingguy.pip
+  version: 1.3.0
+- src: uchida.miniconda
+  version: 0.3.0
+- src: usegalaxy_eu.galaxy_systemd
+  version: 0.1.2
 
 ### Ansible-version
 
