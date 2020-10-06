@@ -6,7 +6,7 @@
   postgresql_query:
     db: galaxy
     login_user: postgres
-    query:  SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
+    query: SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
   register: result
   ignore_errors: yes  
 
@@ -14,13 +14,14 @@
   get_url:
     url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
     dest: "{{ laniakea_galaxy_server_dir }}/manage_bootstrap_user.py"
-  when: result.query_result[0].exists == false 
+  when: result.failed or result.query_result[0].exists == false 
 
 - name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
   shell:
-    cmd: '{{ python_version }} manage_bootstrap_user.py \
+    cmd: 'source {{ laniakea_galaxy_venv_dir }}/bin/activate; \
+          {{ python_version }} manage_bootstrap_user.py \
           -c {{ laniakea_galaxy_config_dir }}/galaxy.yml create \
           -u {{ GALAXY_ADMIN_USERNAME }} \
           -e {{ GALAXY_ADMIN_EMAIL }} \
@@ -29,6 +30,4 @@
     chdir: "{{ laniakea_galaxy_server_dir }}"
   vars: 
     python_version: "{{'python' if (ansible_os_family == 'RedHat') else 'python3'}}" 
-  when: result.query_result[0].exists == false 
-  environment:
-    VIRTUAL_ENV: "{{ laniakea_galaxy_venv_dir }}"
+  when: result.failed or result.query_result[0].exists == false 
