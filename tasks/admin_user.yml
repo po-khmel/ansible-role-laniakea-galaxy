@@ -20,12 +20,12 @@
   become: true
   become_user: galaxy
   shell:
-    cmd: 'source {{ laniakea_galaxy_venv_dir }}/bin/activate; \
-          {{ python_version }} manage_bootstrap_user.py \
-          -c {{ laniakea_galaxy_config_dir }}/galaxy.yml create \
-          -u {{ GALAXY_ADMIN_USERNAME }} \
-          -e {{ GALAXY_ADMIN_EMAIL }} \
-          -p {{ GALAXY_ADMIN_PASSWORD }} \
+    cmd: 'source {{ laniakea_galaxy_venv_dir }}/bin/activate; 
+          {{ python_version }} manage_bootstrap_user.py
+          -c {{ laniakea_galaxy_config_dir }}/galaxy.yml create
+          -u {{ GALAXY_ADMIN_USERNAME }}
+          -e {{ GALAXY_ADMIN_EMAIL }}
+          -p {{ GALAXY_ADMIN_PASSWORD }}
           -a {{ GALAXY_ADMIN_API_KEY }}'
     chdir: "{{ laniakea_galaxy_server_dir }}"
   vars: 
