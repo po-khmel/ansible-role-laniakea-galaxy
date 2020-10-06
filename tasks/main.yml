@@ -59,5 +59,3 @@
 
 - name: create admin user
   include: admin_user.yml
-  when: ansible_os_family == "RedHat" 
-
