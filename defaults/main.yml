@@ -65,7 +65,7 @@ use_pbkdf2: true
 create_galaxy_admin: true
 
 # Galaxy administrator username
-GALAXY_ADMIN_USERNAME: "galaxy_admin_username"
+GALAXY_ADMIN_USERNAME: "galaxyadmin"
 
 # Galaxy administrator password.
 # It is hard coded. To be changed by the administrator.
