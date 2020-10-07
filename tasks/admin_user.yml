@@ -29,3 +29,4 @@
           -a {{ GALAXY_ADMIN_API_KEY }}'
     chdir: "{{ laniakea_galaxy_server_dir }}"
   when: result.failed or result.query_result[0].exists == false 
+  ignore_errors: yes  
