@@ -31,9 +31,13 @@
   import_tasks: install_galaxy_Debian.yml
   when: ansible_os_family == "Debian"
 
-- name: '[EL] Include galaxy role'
-  import_tasks: install_galaxy_RedHat.yml
-  when: ansible_os_family == "RedHat"
+- name: '[EL] Include galaxy role for "{{ uwsgi_mode}}"'
+  import_tasks: install_galaxy_RedHat_mule.yml
+  when: ansible_os_family == "RedHat" and uwsgi_mode == "mule"
+
+- name: '[EL] Include galaxy role for "{{ uwsgi_mode}}"'
+  import_tasks: install_galaxy_RedHat_zerg.yml
+  when: ansible_os_family == "RedHat" and uwsgi_mode == "zerg"
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
