@@ -69,7 +69,7 @@
         threads: 4
         offload-threads: 2
         static-map:
-          - /static/style={{ galaxy_server_dir }}/static/style/blue
+          - /static/style={{ galaxy_server_dir }}/static/style
           - /static={{ galaxy_server_dir }}/static
           - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
         static-safe: client/galaxy/images
