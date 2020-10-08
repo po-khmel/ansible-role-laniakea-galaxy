@@ -63,5 +63,11 @@
 # The old task to populate the database is here: https://github.com/indigo-dc/ansible-role-galaxycloud/blob/master/tasks/postgresql.yml
 - meta: flush_handlers
 
+- name: '[VM] Wait Galaxy'
+  wait_for:
+    host: 0.0.0.0
+    port: '80'
+    timeout: 10
+
 - name: create admin user
   include: admin_user.yml
