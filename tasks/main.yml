@@ -76,6 +76,7 @@
     host: 127.0.0.1
     port: '4010'
     timeout: 300
+  when: uwsgi_mode == "zerg"
 
 - name: create admin user
   include: admin_user.yml
