@@ -65,6 +65,12 @@
   become_user: galaxy
   when: uwsgi_mode == "zerg"
 
+- name: add test-toolshed 
+  template:
+    src: 'tool_sheds_conf.xml.j2'
+    dest: '{{ galaxy_mutable_config_dir }}/tool_sheds_conf.xml'
+
+
 # Start the Galaxy production environment.
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112

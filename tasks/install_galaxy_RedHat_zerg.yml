@@ -58,6 +58,8 @@
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
         conda_auto_install: true
+        ##add test-toolshed
+        tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
         #zerg config
         job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
