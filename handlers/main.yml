@@ -2,15 +2,5 @@
 
 - name: Restart Galaxy
   systemd:
-    name: galaxy
+    name: "{{ 'galaxy' if (uwsgi_mode == 'mule') else 'galaxy-zergling@0'}}"
     state: restarted
-  when: uwsgi_mode == 'mule'
-
-- name: Restart Galaxy
-  systemd:
-    name: "{{ item }}"
-    state: restarted
-  with_items: 
-    - galaxy-zergling@0
-    - galaxy-zergpool
-  when: uwsgi_mode == 'zerg'
