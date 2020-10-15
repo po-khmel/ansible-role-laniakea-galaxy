@@ -1,6 +1,6 @@
 ---
 # Galaxy instance description
-galaxy_instance_description: "ELIXIR-IT"
+galaxy_instance_description: "BIRRAZ"
 
 # User to launch the Galaxy portal
 LA_galaxy_user: {name: galaxy, shell: /bin/bash}
@@ -153,4 +153,4 @@ galaxy_registered_concurrent_jobs: 2
 galaxy_unregistered_concurrent_jobs: 0
 galaxy_instance_codename: galaxy
 
-uwsgi_mode: "mule"
+uwsgi_mode: "zerg"

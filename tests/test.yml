@@ -1,5 +1,12 @@
+
 ---
-- hosts: localhost
-  remote_user: root
+     
+- hosts: galaxyservers
+  become: true
+  vars:
+    GALAXY_ADMIN_USERNAME: "pmandreoli"
+    GALAXY_ADMIN_PASSWORD: "Delta552"
+    GALAXY_ADMIN_API_KEY: "ciaociao"
+    GALAXY_ADMIN_EMAIL: "pietro.mandreoli@gmail.com"
   roles:
-    - test-role
+    - ansible-role-laniakea-galaxy
