@@ -11,6 +11,8 @@
     galaxy_separate_privileges: yes
     galaxy_manage_paths: true
     galaxy_layout: root-dir
+    #add for root:root permessi
+    galaxy_privsep_user: galaxy
     #galaxy_user: {name: galaxy, shell: /bin/bash}
     galaxy_user: '{{ LA_galaxy_user }}' 
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
@@ -88,32 +90,7 @@
         stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
-        #zerg: /home/galaxy/galaxy/var/zergpool.sock
-        mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
-        farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
-
-
-#- name: adding nginx to galaxy group
-#  user:
-#    name: nginx
-#    group: galaxy 
-#  when: ansible_os_family == "CentOS"
-    
-#- name: debug variables 
-#  debug:
-#    var: '{{ tool_search_index_dir }}' 
-#  ignore_errors: yes
-#
-#
-#- name: debug variables  
-#  debug:
-#    var: '{{ tool_cache_data_dir }}' 
-#  ignore_errors: yes
-
-
-
-
-
-
-
+        #nginx mule configuration
+        mule: lib/galaxy/main.py
+        farm: job-handlers:1
 

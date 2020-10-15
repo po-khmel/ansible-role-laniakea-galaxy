@@ -58,8 +58,10 @@
         ftp_upload_site: ftp://localhost
         conda_prefix: /export/tool_deps/_conda
         conda_auto_install: true
+        ##add test-toolshed
+        tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
         #zerg config
-        #job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+        job_config_file: /home/galaxy/galaxy/config/job_conf.xml
         #release_20.05 variables
         tool_search_index_dir: "{{ '/export/galaxy/database/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
         tool_cache_data_dir: "{{ '/export/galaxy/database/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
@@ -90,7 +92,6 @@
         stats: 127.0.0.1:4010
         logto: /tmp/uwsgi.log
         no-orphans: true
-        #zerg: "{{ '/home/galaxy/galaxy/var/zergpool.sock' if (uwsgi_mode == 'zerg') else omit }}"
-        mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
-        farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
+        ##include zerg directive (two different yml are needed because with omit can't undefine the variable
+        zerg: /home/galaxy/galaxy/var/zergpool.sock
 
