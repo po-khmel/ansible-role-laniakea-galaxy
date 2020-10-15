@@ -153,4 +153,4 @@ galaxy_registered_concurrent_jobs: 2
 galaxy_unregistered_concurrent_jobs: 0
 galaxy_instance_codename: galaxy
 
-uwsgi_mode: "zerg"
+uwsgi_mode: "mule"
