@@ -88,7 +88,7 @@
         py-call-osafterfork: true
         enable-threads: true
         stats: 127.0.0.1:4010
-        logto: /tmp/uwsgi.log
+        logto: /var/log/galaxy/uwsgi.log
         no-orphans: true
         #nginx mule configuration
         mule: lib/galaxy/main.py
