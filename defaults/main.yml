@@ -1,4 +1,9 @@
 ---
+
+# Variable that start with LA_ have the same name of the one used by Included roles
+# we add LA_ to override the included roles variables in order to make the role work
+# smoothly and avoiding confusion
+
 # Galaxy instance description
 galaxy_instance_description: "ELIXIR-IT"
 
