@@ -70,6 +70,12 @@
     src: 'tool_sheds_conf.xml.j2'
     dest: '{{ galaxy_mutable_config_dir }}/tool_sheds_conf.xml'
 
+- name: Create log dir for uwsgi
+  file:
+    path: '{{ galaxy_log_path }}'
+    state: directory
+    owner: '{{ LA_galaxy_user.name }}'
+    group: '{{ LA_galaxy_group.name }}'
 
 # Start the Galaxy production environment.
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.

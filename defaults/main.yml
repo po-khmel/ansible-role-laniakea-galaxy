@@ -3,9 +3,8 @@
 galaxy_instance_description: "ELIXIR-IT"
 
 # User to launch the Galaxy portal
-LA_galaxy_user: {name: galaxy, shell: /bin/bash}
-        
-#! add GUID
+LA_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 4001}
+LA_galaxy_group: {name: galaxy, gid: 4001}
 
 # Path to install the Galaxy software
 galaxy_FS_path: /home/galaxy
@@ -15,6 +14,9 @@ galaxy_directory: galaxy
 
 # Galaxy install path 
 galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
+
+# Galaxy log path
+galaxy_log_path: /var/log/galaxy
 
 # Galaxy conig file path and format 
 galaxy_config_style: yaml
