@@ -8,8 +8,8 @@
 galaxy_instance_description: "ELIXIR-IT"
 
 # User to launch the Galaxy portal
-LA_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 4001}
-LA_galaxy_group: {name: galaxy, gid: 4001}
+LA_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 4002}
+LA_galaxy_group: {name: galaxy, gid: 4002}
 
 # Path to install the Galaxy software
 galaxy_FS_path: /home/galaxy
