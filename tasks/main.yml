@@ -27,9 +27,17 @@
     pip_package: python3-pip
   when: ansible_os_family == "Debian"
 
-- name: '[Ubuntu] Include galaxy role'
-  import_tasks: install_galaxy_Debian.yml
-  when: ansible_os_family == "Debian"
+- name: '[Ubuntu] Include galaxy role for "mule"'
+  import_tasks: install_galaxy_Debian_mule.yml
+  when: 
+    - ansible_os_family == "Debian"
+    - uwsgi_mode == "mule"
+
+- name: '[Ubuntu] Include galaxy rolei for "zergpool"'
+  import_tasks: install_galaxy_Debian_zerg.yml
+  when: 
+    - ansible_os_family == "Debian"
+    - uwsgi_mode == "mule"
 
 - name: '[EL] Include galaxy role for "mule"'
   import_tasks: install_galaxy_RedHat_mule.yml
@@ -37,7 +45,7 @@
     - ansible_os_family == "RedHat" 
     - uwsgi_mode == "mule"
 
-- name: '[EL] Include galaxy role for mule'
+- name: '[EL] Include galaxy role for "zergpool"'
   import_tasks: install_galaxy_RedHat_zerg.yml
   when: 
     - ansible_os_family == "RedHat" 
