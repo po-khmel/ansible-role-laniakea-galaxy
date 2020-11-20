@@ -92,6 +92,7 @@
         #change log from tmp to var/log/galaxy
         logto: "{{ galaxy_log_path }}/uwsgi.log"
         no-orphans: true
+        #uwsgi zerg configuration
         zerg: /home/galaxy/galaxy/var/zergpool.sock
 
 

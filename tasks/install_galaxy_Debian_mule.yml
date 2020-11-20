@@ -90,9 +90,9 @@
         #change log from tmp to var/log/galaxy
         logto: "{{ galaxy_log_path }}/uwsgi.log"
         no-orphans: true
-        #zerg: /home/galaxy/galaxy/var/zergpool.sock
-        mule: "{{'lib/galaxy/main.py' if (uwsgi_mode == 'mule') else omit }}"
-        farm: "{{'job-handlers:1' if (uwsgi_mode == 'mule') else omit }}"
+        #uwsgi mule configuration
+        mule: lib/galaxy/main.py
+        farm: job-handlers:1
 
 
 #- name: adding nginx to galaxy group
