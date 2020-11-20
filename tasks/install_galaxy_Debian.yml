@@ -1,5 +1,4 @@
 
-
 - name: Include galaxy role
   include_role:
     name: galaxyproject.galaxy
@@ -13,7 +12,8 @@
     galaxy_layout: root-dir
     #galaxy_user: {name: galaxy, shell: /bin/bash}
     galaxy_user: '{{ LA_galaxy_user }}' 
-    galaxy_group: '{{ LA_galaxy_group }}'
+    #galaxy_group commented for permission error in nginx
+    #galaxy_group: '{{ LA_galaxy_group }}'
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
     galaxy_root: '{{ galaxy_install_path }}'
     galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
