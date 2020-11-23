@@ -37,7 +37,7 @@
   import_tasks: install_galaxy_Debian_zerg.yml
   when: 
     - ansible_os_family == "Debian"
-    - uwsgi_mode == "mule"
+    - uwsgi_mode == "zerg"
 
 - name: '[EL] Include galaxy role for "mule"'
   import_tasks: install_galaxy_RedHat_mule.yml
