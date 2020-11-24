@@ -9,15 +9,15 @@
   file:
     path: /export/galaxy/database/tmp
     state: directory
-    owner: galaxy
-    group: galaxy
+    owner: "{{ LA_galaxy_user.name }}"
+    group: "{{ LA_galaxy_group.name }}"
 
 - name: Create nginx_upload_store dir
   file:
     path: /export/galaxy/database/tmp/nginx_upload_store
     state: directory
     owner: www-data
-    group: galaxy
+    group: "{{ LA_galaxy_group.name }}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
 - name: make a new user

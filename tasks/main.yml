@@ -13,35 +13,37 @@
 - name: Include natefoo role 
   import_tasks: postgresql_objects.yml
 
-- name: Include geerlingguy role 
+- name: '[EL] Include geerlingguy role'  
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python-pip
   when: ansible_os_family == "RedHat" 
 
-- name: Include geerlingguy role [ubuntu]
+- name: '[Ubuntu] Include geerlingguy role' 
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python3-pip
   when: ansible_os_family == "Debian"
 
-- name: '[Ubuntu] Include galaxy role'
-  import_tasks: install_galaxy_Debian.yml
+- name: 'Include galaxy role for "mule"'
+  import_tasks: install_galaxy_mule.yml
+  when: uwsgi_mode == "mule"
+
+- name: 'Include galaxy role for "zergpool"'
+  import_tasks: install_galaxy_zerg.yml
+  when: uwsgi_mode == "zerg"
+
+# Differently from RedHat OS family in Debian SO family web server are run
+# by the www-data user. So in this case we add galaxy to www-data group
+# to solve permission problem related to the fact that nginx is run by www-data user
+
+- name: '[Ubuntu] Add the user www-data in galaxy group'
+  user:
+    name: galaxy
+    group: www-data
   when: ansible_os_family == "Debian"
-
-- name: '[EL] Include galaxy role for "mule"'
-  import_tasks: install_galaxy_RedHat_mule.yml
-  when: 
-    - ansible_os_family == "RedHat" 
-    - uwsgi_mode == "mule"
-
-- name: '[EL] Include galaxy role for mule'
-  import_tasks: install_galaxy_RedHat_zerg.yml
-  when: 
-    - ansible_os_family == "RedHat" 
-    - uwsgi_mode == "zerg"
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
@@ -70,6 +72,12 @@
     src: 'tool_sheds_conf.xml.j2'
     dest: '{{ galaxy_mutable_config_dir }}/tool_sheds_conf.xml'
 
+- name: Create log dir for uwsgi
+  file:
+    path: '{{ galaxy_log_path }}'
+    state: directory
+    owner: '{{ LA_galaxy_user.name }}'
+    group: '{{ LA_galaxy_group.name }}'
 
 # Start the Galaxy production environment.
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.
