@@ -51,10 +51,17 @@
     - ansible_os_family == "RedHat" 
     - uwsgi_mode == "zerg"
 
+- name: Add the user 'www-data' in 'galaxy'
+  user:
+    name: galaxy
+    group: www-data
+
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
   become: yes
   become_user: galaxy
+  #ubuntu error miniconda role TASK directory /export/tooldeps exists permission denied
+  #become_user: root
 
 - name: Include systemd role
   import_tasks: systemd.yml

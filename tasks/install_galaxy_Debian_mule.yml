@@ -1,4 +1,5 @@
 
+
 - name: Include galaxy role
   include_role:
     name: galaxyproject.galaxy
@@ -10,10 +11,11 @@
     galaxy_separate_privileges: yes
     galaxy_manage_paths: true
     galaxy_layout: root-dir
+    #add for root:root permessi
+    galaxy_privsep_user: galaxy
     #galaxy_user: {name: galaxy, shell: /bin/bash}
     galaxy_user: '{{ LA_galaxy_user }}' 
-    #galaxy_group commented for permission error in nginx
-    #galaxy_group: '{{ LA_galaxy_group }}'
+    galaxy_group: '{{ LA_galaxy_group }}'
     #configuration1: no privsep_user no task "adding www-data to galaxy group"
     galaxy_root: '{{ galaxy_install_path }}'
     galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
@@ -90,32 +92,7 @@
         #change log from tmp to var/log/galaxy
         logto: "{{ galaxy_log_path }}/uwsgi.log"
         no-orphans: true
-        #uwsgi mule configuration
+        #nginx mule configuration
         mule: lib/galaxy/main.py
         farm: job-handlers:1
-
-
-#- name: adding nginx to galaxy group
-#  user:
-#    name: nginx
-#    group: galaxy 
-#  when: ansible_os_family == "CentOS"
-    
-#- name: debug variables 
-#  debug:
-#    var: '{{ tool_search_index_dir }}' 
-#  ignore_errors: yes
-#
-#
-#- name: debug variables  
-#  debug:
-#    var: '{{ tool_cache_data_dir }}' 
-#  ignore_errors: yes
-
-
-
-
-
-
-
 
