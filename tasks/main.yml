@@ -13,55 +13,42 @@
 - name: Include natefoo role 
   import_tasks: postgresql_objects.yml
 
-- name: Include geerlingguy role 
+- name: '[EL] Include geerlingguy role'  
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python-pip
   when: ansible_os_family == "RedHat" 
 
-- name: Include geerlingguy role [ubuntu]
+- name: '[Ubuntu] Include geerlingguy role' 
   include_role:
     name: geerlingguy.pip
   vars:
     pip_package: python3-pip
   when: ansible_os_family == "Debian"
 
-- name: '[Ubuntu] Include galaxy role for "mule"'
-  import_tasks: install_galaxy_Debian_mule.yml
-  when: 
-    - ansible_os_family == "Debian"
-    - uwsgi_mode == "mule"
-
-- name: '[Ubuntu] Include galaxy rolei for "zergpool"'
-  import_tasks: install_galaxy_Debian_zerg.yml
-  when: 
-    - ansible_os_family == "Debian"
-    - uwsgi_mode == "zerg"
-
-- name: '[EL] Include galaxy role for "mule"'
-  import_tasks: install_galaxy_RedHat_mule.yml
-  when: 
-    - ansible_os_family == "RedHat" 
-    - uwsgi_mode == "mule"
+- name: 'Include galaxy role for "mule"'
+  import_tasks: install_galaxy_mule.yml
+  when: uwsgi_mode == "mule"
 
 - name: '[EL] Include galaxy role for "zergpool"'
-  import_tasks: install_galaxy_RedHat_zerg.yml
-  when: 
-    - ansible_os_family == "RedHat" 
-    - uwsgi_mode == "zerg"
+  import_tasks: install_galaxy_zerg.yml
+  when: uwsgi_mode == "zerg"
 
-- name: Add the user 'www-data' in 'galaxy'
+# Differently from RedHat OS family in Debian SO family web server are run
+# by the www-data user. So in this case we add galaxy to www-data group
+# to solve permission problem related to the fact that nginx is run by www-data user
+
+- name: '[Ubuntu] Add the user www-data in galaxy group'
   user:
     name: galaxy
     group: www-data
+  when: ansible_os_family == "Debian"
 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
   become: yes
   become_user: galaxy
-  #ubuntu error miniconda role TASK directory /export/tooldeps exists permission denied
-  #become_user: root
 
 - name: Include systemd role
   import_tasks: systemd.yml
