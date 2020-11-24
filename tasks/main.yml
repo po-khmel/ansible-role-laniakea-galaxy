@@ -31,7 +31,7 @@
   import_tasks: install_galaxy_mule.yml
   when: uwsgi_mode == "mule"
 
-- name: '[EL] Include galaxy role for "zergpool"'
+- name: 'Include galaxy role for "zergpool"'
   import_tasks: install_galaxy_zerg.yml
   when: uwsgi_mode == "zerg"
 
