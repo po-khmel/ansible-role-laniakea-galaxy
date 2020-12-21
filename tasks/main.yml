@@ -93,3 +93,10 @@
 
 - name: create admin user
   include: admin_user.yml
+
+- name: install tools and wf 
+  include_role: 
+    name: ansible-role-laniakea-tools
+ 
+  
+
