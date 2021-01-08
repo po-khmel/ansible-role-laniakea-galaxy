@@ -95,8 +95,10 @@
   include: admin_user.yml
 
 - name: install tools and wf 
-  include_role: 
-    name: ansible-role-laniakea-tools
+  become: yes
+  import_tasks: install-tools-wf.yml
+
+    
  
   
 
