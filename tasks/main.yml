@@ -70,7 +70,7 @@
 - name: add test-toolshed 
   template:
     src: 'tool_sheds_conf.xml.j2'
-    dest: '{{ galaxy_mutable_config_dir }}/tool_sheds_conf.xml'
+    dest: '{{ la_galaxy_config_dir }}/tool_sheds_conf.xml'
 
 - name: Create log dir for uwsgi
   file:
@@ -97,8 +97,3 @@
 - name: install tools and wf 
   become: yes
   import_tasks: install-tools-wf.yml
-
-    
- 
-  
-

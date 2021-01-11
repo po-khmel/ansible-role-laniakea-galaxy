@@ -3,6 +3,23 @@
 ansible_python_interpreter: /usr/bin/python3
 
 #laniakea configuration
-laniakea_galaxy_venv_dir: '{{ galaxy_install_path }}/venv' 
-laniakea_galaxy_server_dir:  '{{ galaxy_install_path }}/server'
-laniakea_galaxy_config_dir:  '{{ galaxy_install_path }}/config'
+la_galaxy_venv_dir: '{{ galaxy_install_path }}/venv' 
+la_galaxy_server_dir:  '{{ galaxy_install_path }}/server'
+la_galaxy_config_dir:  '{{ galaxy_install_path }}/config'
+
+##vars:
+la_galaxy_create_user: true
+la_galaxy_force_checkout: true
+la_galaxy_separate_privileges: yes
+la_galaxy_manage_paths: true
+la_galaxy_layout: root-dir
+la_galaxy_privsep_user: galaxy
+la_galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
+la_galaxy_config_file: '{{ la_galaxy_config_dir }}/galaxy.yml'
+la_galaxy_commit_id: "{{ galaxy_version }}"
+la_galaxy_config_style: yaml
+la_galaxy_config:
+export_volume: /export
+database_path: '{{ export_volume }}/galaxy/database'
+la_conda_prefix: '{{ export_volume }}/tool_deps/_conda'
+

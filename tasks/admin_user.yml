@@ -13,21 +13,21 @@
 - name: Download user creation script 
   get_url:
     url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
-    dest: "{{ laniakea_galaxy_server_dir }}/manage_bootstrap_user.py"
+    dest: "{{ la_galaxy_server_dir }}/manage_bootstrap_user.py"
   when: result.failed or result.query_result[0].exists == false 
 
 - name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
   shell:
-    cmd: '. {{ laniakea_galaxy_venv_dir }}/bin/activate; 
+    cmd: '. {{ la_galaxy_venv_dir }}/bin/activate; 
           python3 manage_bootstrap_user.py
-          -c {{ laniakea_galaxy_config_dir }}/galaxy.yml create
+          -c {{ la_galaxy_config_file }} create
           -u {{ GALAXY_ADMIN_USERNAME }}
           -e {{ GALAXY_ADMIN_EMAIL }}
           -p {{ GALAXY_ADMIN_PASSWORD }}
           -a {{ GALAXY_ADMIN_API_KEY }}'
-    chdir: "{{ laniakea_galaxy_server_dir }}"
+    chdir: "{{ la_galaxy_server_dir }}"
   when: result.failed or result.query_result[0].exists == false 
 
 #for centos change . to source if the task fail

@@ -5,7 +5,7 @@
   vars: 
     galaxy_flavor: "{{ la_galaxy_flavor }}"
     galaxy_admin_api_key: "{{ GALAXY_ADMIN_API_KEY }}"
-    galaxy_run_sh_dir: "{{galaxy_FS_path}}/{{galaxy_directory}}/server" 
-    galaxy_virtual_env: "{{ galaxy_venv_dir }}"
-    galaxy_config_file: /home/galaxy/galaxy/galaxy.yml
+    galaxy_run_sh_dir: "{{ la_galaxy_server_dir }}" 
+    galaxy_virtual_env: "{{ la_galaxy_venv_dir }}"
+    galaxy_config_file: "{{ la_galaxy_config_file }}"
     
