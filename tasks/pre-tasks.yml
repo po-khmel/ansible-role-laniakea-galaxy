@@ -10,33 +10,20 @@
     name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3']
   when: ansible_os_family == "RedHat"
 
-- name: Install virtualenv for python3 [centos]
+- name: '[EL] Install virtualenv for python3'
   command: /usr/bin/pip3 install virtualenv 
   when: ansible_os_family == "RedHat"
 
-- name: Disable SELinux
+- name: '[EL] Disable SELinux'
   selinux:
     state: disabled
   when: ansible_os_family == "RedHat"
 
-- name: Install nginx-extras repository
-  apt_repository:
-    repo: ppa:galaxyproject/nginx
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
-
-- name: '[Ubuntu] Prevent nginx update from Ubuntu repository'
-  copy:
-    src: 'galaxyproject-nginx-pin-700'
-    dest: '/etc/apt/preferences.d/'
-  become_user: root
-  become_method: sudo
-  when: ansible_os_family == "Debian"
-
-- name: 'User rules for {{ LA_galaxy_user.name }} to allow no passwd for sudo'
+- name: 'User rules for {{ laniakea_galaxy_user.name }} to allow no passwd for sudo'
   lineinfile:
     dest: '/etc/sudoers'
     state: present
-    line: '{{ LA_galaxy_user.name }} ALL=(ALL) NOPASSWD:ALL'
+    line: '{{ laniakea_galaxy_user.name }} ALL=(ALL) NOPASSWD:ALL'
     insertafter: EOF
   vars:
    ansible_python_interpreter: /usr/bin/python

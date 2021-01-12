@@ -2,26 +2,24 @@
 
 ansible_python_interpreter: /usr/bin/python3
 
-# Variable that start with LA_ have the same name of the one used by Included roles
-# we add LA_ to override the included roles variables in order to make the role work
+# Variable that start with laniakea_ have the same name of the one used by Included roles
+# we add laniakea_ to override the included roles variables in order to make the role work
 # smoothly and avoiding confusion
 
 #galaxy configuration dirs:
-la_galaxy_venv_dir: '{{ galaxy_install_path }}/venv' 
-la_galaxy_server_dir:  '{{ galaxy_install_path }}/server'
-la_galaxy_config_dir:  '{{ galaxy_install_path }}/config'
+laniakea_galaxy_venv_dir: '{{ galaxy_install_path }}/venv' 
+laniakea_galaxy_server_dir:  '{{ galaxy_install_path }}/server'
+laniakea_galaxy_config_dir:  '{{ galaxy_install_path }}/config'
 
 #laniakea galaxy vars
-la_galaxy_create_user: true
-la_galaxy_force_checkout: true
-la_galaxy_separate_privileges: yes
-la_galaxy_manage_paths: true
-la_galaxy_layout: root-dir
-la_galaxy_privsep_user: galaxy
-la_galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
-la_galaxy_config_file: '{{ la_galaxy_config_dir }}/galaxy.yml'
-la_galaxy_commit_id: "{{ galaxy_version }}"
-la_galaxy_config_style: yaml
-#export_volume: /export
-database_path: '{{ export_dir }}/galaxy/database'
-la_conda_prefix: '{{ tool_deps_path }}/_conda'
+laniakea_galaxy_create_user: true
+laniakea_galaxy_force_checkout: true
+laniakea_galaxy_separate_privileges: yes
+laniakea_galaxy_manage_paths: true
+laniakea_galaxy_layout: root-dir
+laniakea_galaxy_privsep_user: galaxy
+laniakea_galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
+laniakea_galaxy_config_file: '{{ laniakea_galaxy_config_dir }}/galaxy.yml'
+laniakea_galaxy_commit_id: "{{ galaxy_version }}"
+laniakea_galaxy_config_style: yaml
+laniakea_conda_prefix: '{{ tool_deps_path }}/_conda'

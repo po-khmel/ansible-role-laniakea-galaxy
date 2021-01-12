@@ -5,6 +5,6 @@
     name: uchida.miniconda
     public: true 
   vars:
-    miniconda_prefix: "{{ la_conda_prefix }}"
+    miniconda_prefix: "{{ laniakea_conda_prefix }}"
     miniconda_version: "4.6.14"
 

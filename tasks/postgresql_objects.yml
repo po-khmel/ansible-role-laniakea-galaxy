@@ -1,5 +1,9 @@
 ---
 
+- name: Include postgresql role
+  include_role:
+    name: galaxyproject.postgresql
+
 - name: Include natefoo postgresql role
   include_role:
     name: natefoo.postgresql_objects

@@ -1,6 +1,31 @@
 ---
 
-- name: Install nginx dependencies
+#Add specific repositroy to download nginx verison with upload module in 
+
+- name: '[Ubuntu] Install nginx-extras repository'
+  apt_repository:
+    repo: ppa:galaxyproject/nginx
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+- name: '[Ubuntu] Prevent nginx update from Ubuntu repository'
+  copy:
+    src: 'galaxyproject-nginx-pin-700'
+    dest: '/etc/apt/preferences.d/'
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "Debian"
+
+# Differently from RedHat OS family in Debian SO family web server are run
+# by the www-data user. So in this case we add galaxy to www-data group
+# to solve permission problem related to the fact that nginx is run by www-data user
+
+- name: '[Ubuntu] Add the user www-data in galaxy group'
+  user:
+    name: galaxy
+    group: www-data
+  when: ansible_os_family == "Debian"
+
+- name: '[Ubuntu] Install nginx dependencies'
   apt:
     pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
@@ -9,31 +34,23 @@
   file:
     path: '{{ database_path }}/tmp'
     state: directory
-    owner: "{{ LA_galaxy_user.name }}"
-    group: "{{ LA_galaxy_group.name }}"
+    owner: "{{ laniakea_galaxy_user.name }}"
+    group: "{{ laniakea_galaxy_group.name }}"
 
-- name: Create nginx_upload_store dir
+- name: '[Ubuntu] Create nginx_upload_store dir'
   file:
     path: '{{ database_path }}/tmp/nginx_upload_store'
     state: directory
     owner: www-data
-    group: "{{ LA_galaxy_group.name }}"
+    group: "{{ laniakea_galaxy_group.name }}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
-- name: make a new user
+- name: '[EL] make a new user'
   user: 
     name: nginx
     state: present
     group: galaxy
   when: ansible_os_family == "RedHat" 
-
-#- name: Create nginx_upload_store dir
-#  file:
-#    path: '{{ database_path }}/tmp/nginx_upload_store
-#    state: directory
-#    owner: www-data
-#    group: galaxy
-#  when: ansible_os_family == "RedHat" 
 
 - name: '[EL] Add NGINX repository'
   command: 'yum-config-manager --add-repo https://depot.galaxyproject.org/yum/galaxy.repo'
@@ -41,7 +58,7 @@
   become_method: sudo
   when: ansible_os_family == "RedHat"
 
-- name: Include nginx role [ubuntu]
+- name: '[Ubuntu] Include nginx role'
   include_role:
     name: galaxyproject.nginx
   vars:
@@ -52,10 +69,10 @@
     nginx_enable_default_server: false
     nginx_conf_http:
       client_max_body_size: 1g
-    galaxy_server_dir: "{{ la_galaxy_server_dir }}" 
+    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
 
-- name: Include nginx role [centos]
+- name: '[EL] Include nginx role'
   include_role:
     name: galaxyproject.nginx
   vars:
@@ -66,7 +83,7 @@
     nginx_enable_default_server: false
     nginx_conf_http:
       client_max_body_size: 1g
-    galaxy_server_dir: "{{ la_galaxy_server_dir }}" 
+    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
     ansible_python_interpreter: /usr/bin/python
     nginx_conf_user: galaxy
     nginx_conf_group: galaxy

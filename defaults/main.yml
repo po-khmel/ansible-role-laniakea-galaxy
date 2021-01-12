@@ -1,15 +1,15 @@
 ---
 
-# Variable that start with LA_ have the same name of the one used by Included roles
-# we add LA_ to override the included roles variables in order to make the role work
+# Variable that start with laniakea_ have the same name of the one used by Included roles
+# we add laniakea_ to override the included roles variables in order to make the role work
 # smoothly and avoiding confusion
 
 # Galaxy instance description
 galaxy_instance_description: "ELIXIR-IT"
 
 # User to launch the Galaxy portal
-LA_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 5001}
-LA_galaxy_group: {name: galaxy, gid: 5001}
+laniakea_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 5001}
+laniakea_galaxy_group: {name: galaxy, gid: 5001}
 
 # Path to install the Galaxy software
 galaxy_FS_path: /home/galaxy
@@ -23,15 +23,11 @@ galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
 # Galaxy log path
 galaxy_log_path: /var/log/galaxy
 
-# Galaxy conig file path and format moved to vars/main.yml
-#galaxy_config_style: yaml
-#galaxy_config_file: /home/galaxy/config/galaxy.yml
+# Galaxy database path
+database_path: '{{ export_dir }}/galaxy/database'
 
 # Galaxy version to install
 galaxy_version: release_20.05
-
-# Galaxy instance ssh public key commented used by previous role
-#galaxy_instance_key_pub: ""
 
 # Galaxy virtual elastic cluster support: Currently supported local and slurm
 galaxy_lrms: local
@@ -103,17 +99,6 @@ galaxy_postgresql_objects_databases:
 nginx_https: false
 
 #______________________________________
-# Init system
-# Supported: supervisord, init
-# supervisord ---> Current default, it is mandatory for docker container, since there's no systemd.
-# init ----------> CentOS 7 and Ubuntu 16.04 use systemd, Ubuntu 14.04 is using upstart.
-#laniakea_init_type: 'supervisord'
-
-#laniakea_supervisor_manage_postgres: "False"
-#laniakea_supervisor_manage_nginx: "False"
-#laniakea_supervisor_manage_proftpd: "False"
-
-#______________________________________
 # Enable advanced storage configuration
 # False by default!
 # If this option is true the configuration is entrusted to indigo-dc.galaxycloud.os
@@ -125,7 +110,7 @@ enable_storage_advanced_options: false
 # Inform the role if galaxy tools and reference data will be installed
 # If yes, galaxy is not started
 
-la_galaxy_flavor: 'galaxy-CoVaCS'
+laniakea_galaxy_flavor: 'galaxy-minimal'
 get_refdata: false
 
 #______________________________________
