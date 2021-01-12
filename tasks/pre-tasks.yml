@@ -10,7 +10,7 @@
     name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3']
   when: ansible_os_family == "RedHat"
 
-- name: Install virtualenv for pytho3 [centos]
+- name: Install virtualenv for python3 [centos]
   command: /usr/bin/pip3 install virtualenv 
   when: ansible_os_family == "RedHat"
 

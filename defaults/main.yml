@@ -23,9 +23,9 @@ galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
 # Galaxy log path
 galaxy_log_path: /var/log/galaxy
 
-# Galaxy conig file path and format 
-galaxy_config_style: yaml
-galaxy_config_file: /home/galaxy/config/galaxy.yml
+# Galaxy conig file path and format moved to vars/main.yml
+#galaxy_config_style: yaml
+#galaxy_config_file: /home/galaxy/config/galaxy.yml
 
 # Galaxy version to install
 galaxy_version: release_20.05
@@ -53,7 +53,7 @@ fast_update: true # Force database update by copying cached files. Only for test
 use_pbkdf2: true
 
 ## Tool dependency directory
-#tool_deps_path: "{{ export_dir }}/tool_deps"
+tool_deps_path: "{{ export_dir }}/tool_deps"
 #
 ## Conda configuration
 #conda_prefix: "{{ tool_deps_path }}/_conda"

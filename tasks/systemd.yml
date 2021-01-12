@@ -6,7 +6,7 @@
   vars:
     galaxy_systemd_handler_env: ""
     galaxy_systemd_workflow_scheduler_env: ""
-    galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
+    galaxy_config_file: '{{ la_galaxy_config_file }}' 
     galaxy_systemd_mode: "{{ uwsgi_mode }}"
   when: uwsgi_mode == "mule"
 
@@ -17,7 +17,7 @@
     galaxy_systemd_handler_env: ""
     galaxy_systemd_workflow_scheduler_env: ""
     galaxy_systemd_handlers: 4
-    galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
+    galaxy_config_file: '{{ la_galaxy_config_file }}' 
     galaxy_systemd_zergling_uwsgi_config_style: yaml
     galaxy_systemd_mode: "{{ uwsgi_mode }}"
   when: uwsgi_mode == "zerg"
