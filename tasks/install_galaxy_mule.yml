@@ -59,9 +59,9 @@
       uwsgi:
         socket: 127.0.0.1:4001
         buffer-size: 16384
-        processes: 3
-        threads: 4
-        offload-threads: 2
+        processes: "{{ laniakea_uwsgi_processes }}"
+        threads: "{{ laniakea_uwsgi_threads }}"
+        offload-threads: "{{ laniakea_uwsgi_offload_threads }}" 
         static-map:
           - /static/style={{ laniakea_galaxy_server_dir }}/static/style
           - /static={{ laniakea_galaxy_server_dir }}/static

@@ -5,7 +5,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Install dependencies 
-  import_tasks: pre-tasks.yml
+  import_tasks: pre_tasks.yml
 
 - name: Include postgresql-roles
   import_tasks: postgresql_objects.yml
@@ -50,4 +50,5 @@
 
 - name: install tools and wf 
   become: yes
-  import_tasks: install-tools-wf.yml
+  import_tasks: install_tools_wf.yml
+  when: debug 

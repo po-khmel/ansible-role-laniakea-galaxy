@@ -23,3 +23,9 @@ laniakea_galaxy_config_file: '{{ laniakea_galaxy_config_dir }}/galaxy.yml'
 laniakea_galaxy_commit_id: "{{ galaxy_version }}"
 laniakea_galaxy_config_style: yaml
 laniakea_conda_prefix: '{{ tool_deps_path }}/_conda'
+
+#uwsgi_vars
+laniakea_uwsgi_processes: 3 
+laniakea_uwsgi_threads: 4 
+laniakea_uwsgi_offload_threads: 2
+

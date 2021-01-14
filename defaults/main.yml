@@ -146,3 +146,8 @@ galaxy_unregistered_concurrent_jobs: 0
 galaxy_instance_codename: galaxy
 
 uwsgi_mode: "mule"
+
+#____________________________________
+#set debug variable
+
+debug: false
