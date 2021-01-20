@@ -1,0 +1,11 @@
+
+- name: install tools and wf 
+  include_role: 
+    name: ansible-role-laniakea-tools
+  vars: 
+    laniakea_galaxy_flavor: "{{ galaxy_flavor }}"
+    galaxy_admin_api_key: "{{ GALAXY_ADMIN_API_KEY }}"
+    galaxy_run_sh_dir: "{{ laniakea_galaxy_server_dir }}" 
+    galaxy_virtual_env: "{{ laniakea_galaxy_venv_dir }}"
+    galaxy_config_file: "{{ laniakea_galaxy_config_file }}"
+    

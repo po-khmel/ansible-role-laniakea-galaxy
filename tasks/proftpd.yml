@@ -5,12 +5,12 @@
     name: galaxyproject.proftpd
   vars:
     proftpd_options:
-      - User: "{{ LA_galaxy_user.name }}"
-      - Group: "{{ LA_galaxy_group.name }}"
+      - User: "{{ laniakea_galaxy_user.name }}"
+      - Group: "{{ laniakea_galaxy_group.name }}"
       - DefaultAddress: "{{ansible_default_ipv4.address}}"
     proftpd_sql_db: galaxy@/var/run/postgresql
-    galaxy_user: galaxy
-    proftpd_sql_user: galaxy
+    galaxy_user: "{{ laniakea_galaxy_user.name }}" 
+    proftpd_sql_user: "{{ laniakea_galaxy_user.name }}"
     proftpd_welcome: "galaxy ftp server"
     proftpd_db_user: "galaxyftp"
     proftpd_db_passwd: 'galaxy'
@@ -20,7 +20,7 @@
     proftpd_passive_port_high: 30009
     set_proftpd_random_password: true
     proftpd_galaxy_auth: yes
-    galaxy_ftp_upload_dir: /export/galaxy/database/ftp
+    galaxy_ftp_upload_dir: '{{ database_path }}/ftp' 
     #centos
     ansible_python_interpreter: /usr/bin/python
 

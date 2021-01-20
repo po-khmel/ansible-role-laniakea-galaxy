@@ -22,7 +22,7 @@
   shell:
     cmd: '. {{ laniakea_galaxy_venv_dir }}/bin/activate; 
           python3 manage_bootstrap_user.py
-          -c {{ laniakea_galaxy_config_dir }}/galaxy.yml create
+          -c {{ laniakea_galaxy_config_file }} create
           -u {{ GALAXY_ADMIN_USERNAME }}
           -e {{ GALAXY_ADMIN_EMAIL }}
           -p {{ GALAXY_ADMIN_PASSWORD }}

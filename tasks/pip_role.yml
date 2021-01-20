@@ -1,0 +1,15 @@
+---
+
+- name: '[EL] Include geerlingguy role'  
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_package: python-pip
+  when: ansible_os_family == "RedHat" 
+
+- name: '[Ubuntu] Include geerlingguy role' 
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_package: python3-pip
+  when: ansible_os_family == "Debian"

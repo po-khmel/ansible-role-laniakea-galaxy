@@ -1,50 +1,21 @@
 ---
 
-- include_vars: vars-RedHat.yml
+- name: '[EL] centos specific vars'
+  include_vars: vars-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
 - name: Install dependencies 
-  import_tasks: pre-tasks.yml
+  import_tasks: pre_tasks.yml
 
-- name: Include postgresql role
-  include_role:
-    name: galaxyproject.postgresql
-
-- name: Include natefoo role 
+- name: Include postgresql-roles
   import_tasks: postgresql_objects.yml
 
-- name: '[EL] Include geerlingguy role'  
-  include_role:
-    name: geerlingguy.pip
-  vars:
-    pip_package: python-pip
-  when: ansible_os_family == "RedHat" 
+- name: include pip role
+  import_tasks: pip_role.yml
 
-- name: '[Ubuntu] Include geerlingguy role' 
-  include_role:
-    name: geerlingguy.pip
-  vars:
-    pip_package: python3-pip
-  when: ansible_os_family == "Debian"
-
-- name: 'Include galaxy role for "mule"'
-  import_tasks: install_galaxy_mule.yml
-  when: uwsgi_mode == "mule"
-
-- name: 'Include galaxy role for "zergpool"'
-  import_tasks: install_galaxy_zerg.yml
-  when: uwsgi_mode == "zerg"
-
-# Differently from RedHat OS family in Debian SO family web server are run
-# by the www-data user. So in this case we add galaxy to www-data group
-# to solve permission problem related to the fact that nginx is run by www-data user
-
-- name: '[Ubuntu] Add the user www-data in galaxy group'
-  user:
-    name: galaxy
-    group: www-data
-  when: ansible_os_family == "Debian"
-
+- name: include galaxy role
+  include: install_galaxy.yml 
+ 
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
   become: yes
@@ -61,28 +32,11 @@
   become: yes
   become_user: root
 
-- name: set default laniakea job conf 
-  import_tasks: job_conf.yml
-  become: yes 
-  become_user: galaxy
-  when: uwsgi_mode == "zerg"
-
-- name: add test-toolshed 
-  template:
-    src: 'tool_sheds_conf.xml.j2'
-    dest: '{{ galaxy_mutable_config_dir }}/tool_sheds_conf.xml'
-
-- name: Create log dir for uwsgi
-  file:
-    path: '{{ galaxy_log_path }}'
-    state: directory
-    owner: '{{ LA_galaxy_user.name }}'
-    group: '{{ LA_galaxy_group.name }}'
-
 # Start the Galaxy production environment.
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112
 # The old task to populate the database is here: https://github.com/indigo-dc/ansible-role-galaxycloud/blob/master/tasks/postgresql.yml
+
 - meta: flush_handlers
 
 - name: '[VM] Wait Galaxy'
@@ -93,3 +47,8 @@
 
 - name: create admin user
   include: admin_user.yml
+
+- name: install tools and wf 
+  become: yes
+  import_tasks: install_tools_wf.yml
+  when: debug 
