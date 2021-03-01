@@ -53,8 +53,8 @@
         #add test-toolshed
         tool_sheds_config_file: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
         #release_20.05 variables
-        tool_search_index_dir: "{{ '{{ database_path }}/tool_search_index_dir' if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
-        tool_cache_data_dir: "{{ '{{ database_path }}/tool_cache'  if ( galaxy_commit_id | replace ('release_','') |float) >= 20.05 else omit }}" 
+        tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
+        tool_cache_data_dir: '{{ database_path }}/tool_cache'
 
       uwsgi:
         socket: 127.0.0.1:4001
