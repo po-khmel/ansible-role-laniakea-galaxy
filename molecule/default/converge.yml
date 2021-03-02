@@ -47,4 +47,4 @@
       when: ansible_os_family == "RedHat"
 
   roles:
-    - role: ansible-pulsar
+    - role: ansible-role-laniakea-galaxy
