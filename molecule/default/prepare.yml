@@ -6,3 +6,17 @@
 
   roles:
     - role: robertdebock.bootstrap
+
+  post_tasks:
+
+    - name: "[CentOS 7] Install dependencies"
+      yum:
+        name:
+          - "@Development tools"
+          - git
+          - python-virtualenv
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "RedHat"
+
+
