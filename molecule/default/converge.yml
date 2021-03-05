@@ -37,13 +37,8 @@
  #       - python3-setuptools
 
     - name: "[CentOS 7] Install dependencies"
-      yum:
-        name:
-          - "@Development tools"
-          - git
-          - python-virtualenv
-        state: latest
-        update_cache: yes
+      package:
+        name: ['@Development tools']
       when: ansible_os_family == "RedHat"
 
   roles:
