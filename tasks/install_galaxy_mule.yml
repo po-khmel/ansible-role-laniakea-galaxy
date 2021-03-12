@@ -1,5 +1,4 @@
-
-
+---
 - name: Include galaxy role
   include_role:
     name: galaxyproject.galaxy
@@ -86,4 +85,3 @@
         #nginx mule configuration
         mule: lib/galaxy/main.py
         farm: job-handlers:1
-

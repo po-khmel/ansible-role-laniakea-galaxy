@@ -1,5 +1,4 @@
 ---
-
 - name: Include miniconda role
   include_role:
     name: uchida.miniconda
@@ -7,4 +6,3 @@
   vars:
     miniconda_prefix: "{{ laniakea_conda_prefix }}"
     miniconda_version: "4.6.14"
-

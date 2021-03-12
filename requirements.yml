@@ -1,3 +1,7 @@
+# requirements for github action
+- src: robertdebock.bootstrap
+
+# requirements to install galaxy
 - src: galaxyproject.galaxy
   version: 0.9.5
 

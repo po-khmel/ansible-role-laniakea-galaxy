@@ -1,5 +1,4 @@
 ---
-
 - name: Include proftpd role
   include_role:
     name: galaxyproject.proftpd
@@ -7,14 +6,14 @@
     proftpd_options:
       - User: "{{ laniakea_galaxy_user.name }}"
       - Group: "{{ laniakea_galaxy_group.name }}"
-      - DefaultAddress: "{{ansible_default_ipv4.address}}"
+      - DefaultAddress: "{{ ansible_default_ipv4.address }}"
     proftpd_sql_db: galaxy@/var/run/postgresql
     galaxy_user: "{{ laniakea_galaxy_user.name }}" 
     proftpd_sql_user: "{{ laniakea_galaxy_user.name }}"
     proftpd_welcome: "galaxy ftp server"
     proftpd_db_user: "galaxyftp"
     proftpd_db_passwd: 'galaxy'
-    proftpd_files_path: "{{galaxy_db_dir}}/ftp"
+    proftpd_files_path: "{{ galaxy_db_dir }}/ftp"
     proftpd_ftp_port: 21
     proftpd_passive_port_low: 30000
     proftpd_passive_port_high: 30009
@@ -36,4 +35,3 @@
     state: restarted
     name: proftpd
   when: ansible_facts['os_family'] == "Debian"
-

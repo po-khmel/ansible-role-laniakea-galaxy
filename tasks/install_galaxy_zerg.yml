@@ -1,5 +1,4 @@
-
-
+---
 - name: Include galaxy role
   include_role:
     name: galaxyproject.galaxy
@@ -85,4 +84,3 @@
         no-orphans: true
         ##include zerg directive (two different yml are needed because with omit can't undefine the variable
         zerg: /home/galaxy/galaxy/var/zergpool.sock
-

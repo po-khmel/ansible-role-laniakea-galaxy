@@ -14,7 +14,7 @@
   get_url:
     url: https://raw.githubusercontent.com/Laniakea-elixir-it/Scripts/python3/galaxy_tools/py3_manage_bootstrap_user.py
     dest: "{{ laniakea_galaxy_server_dir }}/manage_bootstrap_user.py"
-  when: result.failed or result.query_result[0].exists == false 
+  when: result.failed or not result.query_result[0].exists
 
 - name: Create galaxy user with API_KEY to install tools
   become: true
@@ -28,6 +28,6 @@
           -p {{ GALAXY_ADMIN_PASSWORD }}
           -a {{ GALAXY_ADMIN_API_KEY }}'
     chdir: "{{ laniakea_galaxy_server_dir }}"
-  when: result.failed or result.query_result[0].exists == false 
+  when: result.failed or not result.query_result[0].exists
 
 #for centos change . to source if the task fail
