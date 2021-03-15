@@ -22,9 +22,6 @@
       galaxy:
         brand: "{{ galaxy_instance_description }}"
         admin_users: "{{ GALAXY_ADMIN_EMAIL }}"
-        admin_email: "{{ GALAXY_ADMIN_EMAIL }}"
-        admin_username: "{{ GALAXY_ADMIN_USERNAME }}"
-        admin_password: "{{ GALAXY_ADMIN_PASSWORD }}"
         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
         install_database_connection: "postgresql:///galaxy_tools?host=/var/run/postgresql"
         job_working_directory: '{{ database_path }}/job_working_directory' 
@@ -50,7 +47,7 @@
         conda_prefix: '{{ laniakea_conda_prefix }}'
         conda_auto_install: true
         #add test-toolshed
-        tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
+        tool_sheds_config_file: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
         #release_20.05 variables
         tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
         tool_cache_data_dir: '{{ database_path }}/tool_cache' 
