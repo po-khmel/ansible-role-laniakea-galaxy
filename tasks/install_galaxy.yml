@@ -1,12 +1,6 @@
 ---
-
-- name: 'Include galaxy role for "mule"'
-  import_tasks: install_galaxy_mule.yml
-  when: uwsgi_mode == "mule"
-
-- name: 'Include galaxy role for "zergpool"'
-  import_tasks: install_galaxy_zerg.yml
-  when: uwsgi_mode == "zerg"
+- name: 'Include galaxy role for generic'
+  import_tasks: install_galaxy_role_vars.yml
 
 - name: add test-toolshed 
   template:
@@ -25,3 +19,20 @@
   become: yes 
   become_user: galaxy
   when: uwsgi_mode == "zerg"
+
+- name: Insert zerg block
+  blockinfile:
+    path: '{{ laniakea_galaxy_config_file }}'
+    block: |
+         #uwsgi mode zerg
+             zerg: /home/galaxy/galaxy/var/zergpool.sock
+  when: uwsgi_mode == "zerg"
+
+- name: Insert mule block
+  blockinfile:
+    path: '{{ laniakea_galaxy_config_file }}'
+    block: |
+         #uwsgi mode mule
+             mule: lib/galaxy/main.py
+             farm: job-handlers:1
+  when: uwsgi_mode == "mule"

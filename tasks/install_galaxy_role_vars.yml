@@ -79,6 +79,3 @@
         #change log from tmp to var/log/galaxy
         logto: "{{ galaxy_log_path }}/uwsgi.log"
         no-orphans: true
-        #nginx mule configuration
-        mule: lib/galaxy/main.py
-        farm: job-handlers:1
