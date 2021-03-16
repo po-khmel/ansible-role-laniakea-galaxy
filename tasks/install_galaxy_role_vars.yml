@@ -22,9 +22,6 @@
       galaxy:
         brand: "{{ galaxy_instance_description }}"
         admin_users: "{{ GALAXY_ADMIN_EMAIL }}"
-        admin_email: "{{ GALAXY_ADMIN_EMAIL }}"
-        admin_username: "{{ GALAXY_ADMIN_USERNAME }}"
-        admin_password: "{{ GALAXY_ADMIN_PASSWORD }}"
         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
         install_database_connection: "postgresql:///galaxy_tools?host=/var/run/postgresql"
         job_working_directory: '{{ database_path }}/job_working_directory' 
@@ -50,17 +47,17 @@
         conda_prefix: '{{ laniakea_conda_prefix }}'
         conda_auto_install: true
         #add test-toolshed
-        tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
+        tool_sheds_config_file: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
         #release_20.05 variables
         tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
-        tool_cache_data_dir: '{{ database_path }}/tool_cache' 
+        tool_cache_data_dir: '{{ database_path }}/tool_cache'
 
       uwsgi:
         socket: 127.0.0.1:4001
         buffer-size: 16384
         processes: "{{ laniakea_uwsgi_processes }}"
         threads: "{{ laniakea_uwsgi_threads }}"
-        offload-threads: "{{ laniakea_uwsgi_offload_threads }}"
+        offload-threads: "{{ laniakea_uwsgi_offload_threads }}" 
         static-map:
           - /static/style={{ laniakea_galaxy_server_dir }}/static/style
           - /static={{ laniakea_galaxy_server_dir }}/static
@@ -82,5 +79,3 @@
         #change log from tmp to var/log/galaxy
         logto: "{{ galaxy_log_path }}/uwsgi.log"
         no-orphans: true
-        ##include zerg directive (two different yml are needed because with omit can't undefine the variable
-        zerg: /home/galaxy/galaxy/var/zergpool.sock
