@@ -23,6 +23,7 @@
 - name: Insert zerg block
   blockinfile:
     path: '{{ laniakea_galaxy_config_file }}'
+    insertafter: "^uwsgi:"
     block: |
          #uwsgi mode zerg
              zerg: /home/galaxy/galaxy/var/zergpool.sock
@@ -31,6 +32,7 @@
 - name: Insert mule block
   blockinfile:
     path: '{{ laniakea_galaxy_config_file }}'
+    insertafter: "^uwsgi:"
     block: |
          #uwsgi mode mule
              mule: lib/galaxy/main.py
