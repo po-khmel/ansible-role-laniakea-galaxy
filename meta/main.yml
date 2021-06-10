@@ -19,5 +19,6 @@ galaxy_info:
 dependencies:
   - role: indigo-dc.docker
     vars:
-      docker_config:  { "data-root": "{{ export_dir }}/docker_image", }  
+      docker_config:  { "data-root": "{{ export_dir }}/docker_image", }
+      ansible_python_interpreter: /usr/bin/python2
     when: enable_galaxy_ie
