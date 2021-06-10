@@ -1,0 +1,19 @@
+---
+- name: Include laniakea.galaxy_ie role
+  include_role:
+    name: laniakea.galaxy_ie
+
+- name: Add Interactive environment block
+  blockinfile:
+    path: '{{ laniakea_galaxy_config_file }}'
+    insertafter: EOF
+    block: |
+         # Add gie options
+             interactive_environment_plugins_directory: '{{ laniakea_galaxy_server_dir }}/config/plugins/interactive_environments'
+             dynamic_proxy_manage: true
+             dynamic_proxy_session_map: database/session_map.sqlite
+             dynamic_proxy_bind_port: 8800
+             dynamic_proxy_bind_ip: 0.0.0.0
+             dynamic_proxy_debug: true
+             dynamic_proxy_external_proxy: true
+             dynamic_proxy_prefix: gie_proxy

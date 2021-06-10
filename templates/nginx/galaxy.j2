@@ -45,6 +45,23 @@ server {
                   $vis_d/static/$static_file =404;
     }
 
+{% if enable_galaxy_ie %}
+    # Global GIE configuration
+    location /gie_proxy {
+            proxy_pass http://localhost:8800/gie_proxy;
+            proxy_redirect off;
+    }
+
+    # Project Jupyter specific. Other IEs may require their own routes.
+    location ~ ^/gie_proxy/jupyter/(?<nbtype>[^/]+)/api/kernels(?<rest>.*?)$ {
+            proxy_pass http://localhost:8800/gie_proxy/jupyter/$nbtype/api/kernels$rest;
+            proxy_redirect off;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+    }
+{% endif %}
+
    # redirect /prefix -> /prefix
    # rewrite ^/galaxy$ /galaxy/ last;
 

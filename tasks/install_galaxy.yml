@@ -1,8 +1,8 @@
 ---
-- name: 'Include galaxy role for generic'
+- name: Install and configure Galaxy
   import_tasks: install_galaxy_role_vars.yml
 
-- name: add test-toolshed 
+- name: Add test-toolshed 
   template:
     src: 'tool_sheds_conf.xml.j2'
     dest: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
@@ -14,13 +14,13 @@
     owner: '{{ laniakea_galaxy_user.name }}'
     group: '{{ laniakea_galaxy_group.name }}'
 
-- name: set default laniakea job conf 
+- name: Set default job conf 
   import_tasks: job_conf.yml
   become: yes 
   become_user: galaxy
   when: uwsgi_mode == "zerg"
 
-- name: Insert zerg block
+- name: Add zerg block
   blockinfile:
     path: '{{ laniakea_galaxy_config_file }}'
     insertafter: "^uwsgi:"
@@ -29,7 +29,7 @@
              zerg: /home/galaxy/galaxy/var/zergpool.sock
   when: uwsgi_mode == "zerg"
 
-- name: Insert mule block
+- name: Add mule block
   blockinfile:
     path: '{{ laniakea_galaxy_config_file }}'
     insertafter: "^uwsgi:"
@@ -38,3 +38,7 @@
              mule: lib/galaxy/main.py
              farm: job-handlers:1
   when: uwsgi_mode == "mule"
+
+- name: Enable Galaxy Interactive Environments
+  import_tasks: galaxy_ie.yml
+  when: enable_galaxy_ie
