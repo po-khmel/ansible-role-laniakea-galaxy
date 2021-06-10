@@ -148,6 +148,10 @@ galaxy_instance_codename: galaxy
 uwsgi_mode: "mule"
 
 #____________________________________
+# Enable Interactive environments
+enable_galaxy_ie: true
+
+#____________________________________
 #set debug variable
 
 debug: false
