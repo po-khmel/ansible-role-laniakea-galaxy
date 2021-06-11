@@ -1,6 +1,6 @@
 ---
 
-ansible_python_interpreter: /usr/bin/python3
+#ansible_python_interpreter: /usr/bin/python3
 
 # Variable that start with laniakea_ have the same name of the one used by Included roles
 # we add laniakea_ to override the included roles variables in order to make the role work
