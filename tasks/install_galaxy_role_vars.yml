@@ -4,7 +4,7 @@
     name: galaxyproject.galaxy
     public: true
   vars:
-    ansible_python_interpreter: pyenv
+    ansible_python_interpreter: pyvenv
     #pip_virtualenv_command: /usr/bin/python3 -m virtualenv
     galaxy_create_user: "{{ laniakea_galaxy_create_user }}"
     galaxy_force_checkout: "{{ laniakea_galaxy_force_checkout }}"
