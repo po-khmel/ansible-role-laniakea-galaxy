@@ -6,6 +6,7 @@
 - name: Add Interactive environment block
   blockinfile:
     path: '{{ laniakea_galaxy_config_file }}'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GALAXY I.E."
     insertafter: EOF
     block: |
          # Add gie options
