@@ -84,7 +84,6 @@
     nginx_conf_http:
       client_max_body_size: 1g
     galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
-    #ansible_python_interpreter: /usr/bin/python
     nginx_conf_user: galaxy
     nginx_conf_group: galaxy
   when: ansible_os_family == "RedHat" 
