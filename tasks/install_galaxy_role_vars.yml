@@ -4,7 +4,9 @@
     name: galaxyproject.galaxy
     public: true
   vars:
-    pip_virtualenv_command: /usr/bin/python3 -m virtualenv
+    galaxy_virtualenv_command: python3 -m virtualenv
+    galaxy_venv_dir: "{{ laniakea_galaxy_venv_dir }}"
+    #pip_virtualenv_command: /usr/bin/python3 -m virtualenv
     galaxy_create_user: "{{ laniakea_galaxy_create_user }}"
     galaxy_force_checkout: "{{ laniakea_galaxy_force_checkout }}"
     galaxy_separate_privileges: "{{ laniakea_galaxy_separate_privileges }}"

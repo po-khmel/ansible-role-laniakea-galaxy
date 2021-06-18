@@ -10,7 +10,9 @@
   when: ansible_os_family == "RedHat"
 
 - name: '[EL] Install virtualenv for python3'
-  command: /usr/bin/pip3 install virtualenv 
+  pip:
+    name: virtualenv
+    executable: pip3
   when: ansible_os_family == "RedHat"
 
 - name: '[EL] Disable SELinux'
@@ -24,5 +26,3 @@
     state: present
     line: '{{ laniakea_galaxy_user.name }} ALL=(ALL) NOPASSWD:ALL'
     insertafter: EOF
-  vars:
-   ansible_python_interpreter: /usr/bin/python
