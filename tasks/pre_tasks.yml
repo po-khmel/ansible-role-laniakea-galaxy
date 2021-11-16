@@ -6,7 +6,8 @@
 
 - name: '[EL] Install Galaxy Dependencies'
   package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3']
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','ca-certificates']
+    state: latest
   when: ansible_os_family == "RedHat"
 
 - name: '[EL] Install virtualenv for python3'
