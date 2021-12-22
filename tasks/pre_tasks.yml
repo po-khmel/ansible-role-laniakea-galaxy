@@ -6,15 +6,15 @@
 
 - name: '[EL] Install Galaxy Dependencies'
   package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','ca-certificates']
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python3-virtualenv','ca-certificates']
     state: latest
   when: ansible_os_family == "RedHat"
 
-- name: '[EL] Install virtualenv for python3'
-  pip:
-    name: virtualenv
-    executable: pip3
-  when: ansible_os_family == "RedHat"
+#- name: '[EL] Install virtualenv for python3'
+#  pip:
+#    name: virtualenv
+#    executable: pip3
+#  when: ansible_os_family == "RedHat"
 
 - name: '[EL] Disable SELinux'
   selinux:
