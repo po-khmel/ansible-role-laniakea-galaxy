@@ -28,7 +28,7 @@ server {
 
     # The style directory is in a slightly different location
     location /galaxy/static/style {
-        alias {{ galvaxy_server_dir }}/static/style;
+        alias {{ galaxy_server_dir }}/static/style;
         expires 24h;
     }
 
