@@ -39,7 +39,8 @@
         object_store_cache_path: '{{ database_path }}/object_store_cache'
         cluster_file_directory: '{{ database_path }}/pbs'
         nginx_upload_store: '{{ database_path }}/tmp/nginx_upload_store'
-        nginx_upload_path: "/_upload"
+        nginx_upload_path: "/galaxy/_upload"
+        nginx_x_accel_redirect_base: '/_x_accel_redirect'
         require_login: "True"
         allow_user_creation: "True"
         allow_user_impersonation: "True"
@@ -68,7 +69,8 @@
         master: true
         virtualenv: "{{ laniakea_galaxy_venv_dir }}"
         pythonpath: "{{ laniakea_galaxy_server_dir }}/lib"
-        module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+        #module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+        mount: /galaxy=galaxy.webapps.galaxy.buildapp:uwsgi_app()
         manage-script-name: true
         thunder-lock: true
         die-on-term: true
