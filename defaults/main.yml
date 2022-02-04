@@ -103,10 +103,9 @@ nginx_https: false
 enable_storage_advanced_options: false
 
 #______________________________________
-# Inform the role if galaxy tools and reference data will be installed
-# If yes, galaxy is not started
-galaxy_flavor: 'galaxy-minimal'
-enable_elixir_it_cvmfs: false
+# Enable ELIXIR-IT cvmfs
+# Currently true, but this depends on flavours.
+enable_elixir_it_cvmfs: true
 
 #______________________________________
 # Certbot
