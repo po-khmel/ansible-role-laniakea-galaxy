@@ -7,6 +7,10 @@
 - name: Install dependencies 
   import_tasks: pre_tasks.yml
 
+- name: Mount reference data
+  import_tasks: refdata.yml
+  when: get_refdata
+
 - name: Include postgresql-roles
   import_tasks: postgresql_objects.yml
 
@@ -47,8 +51,3 @@
 
 - name: create admin user
   include: admin_user.yml
-
-- name: install tools and wf 
-  become: yes
-  import_tasks: install_tools_wf.yml
-  when: debug 
