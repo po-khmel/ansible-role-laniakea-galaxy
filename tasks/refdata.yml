@@ -1,0 +1,3 @@
+---
+- name: Mount galaxyproject and elixir-italy CVMFS
+  include_role: laniakea.cvmfs_client_config
