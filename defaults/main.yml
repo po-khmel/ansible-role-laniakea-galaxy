@@ -106,7 +106,7 @@ enable_storage_advanced_options: false
 # Inform the role if galaxy tools and reference data will be installed
 # If yes, galaxy is not started
 galaxy_flavor: 'galaxy-minimal'
-get_refdata: true
+enable_elixir_it_cvmfs: false
 
 #______________________________________
 # Certbot
