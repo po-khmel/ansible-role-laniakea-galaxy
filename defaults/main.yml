@@ -106,6 +106,7 @@ enable_storage_advanced_options: false
 # Enable ELIXIR-IT cvmfs
 # Currently true, but this depends on flavours.
 enable_elixir_it_cvmfs: true
+galaxy_flavor: galaxy-minimal
 
 #______________________________________
 # Certbot
