@@ -16,6 +16,17 @@
     dest: "{{ laniakea_galaxy_server_dir }}/manage_bootstrap_user.py"
   when: result.failed or not result.query_result[0].exists
 
+- name: Set Password from vault
+  set_fact:
+    GALAXY_ADMIN_PASSWORD: '{{ vault_secrets.data.admin_password }}'
+  no_log: True
+  when: retrieve_passphrase_from_vault
+
+- name: Create admin user random password api key
+  set_fact:
+    GALAXY_ADMIN_API_KEY: "{{ lookup('password', '/dev/null length=50') }}"
+  no_log: True
+
 - name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
