@@ -1,4 +1,4 @@
 ---
-- name: Include laniakea.interactive_tools role
+- name: Include laniakea.galaxy_interactive_tools role
   include_role:
-    name: laniakea.interactive_tools
+    name: laniakea.galaxy_interactive_tools
