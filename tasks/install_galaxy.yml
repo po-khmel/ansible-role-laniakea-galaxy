@@ -38,7 +38,3 @@
              mule: lib/galaxy/main.py
              farm: job-handlers:1
   when: uwsgi_mode == "mule"
-
-- name: Enable Galaxy Interactive Environments
-  import_tasks: galaxy_ie.yml
-  when: enable_galaxy_ie

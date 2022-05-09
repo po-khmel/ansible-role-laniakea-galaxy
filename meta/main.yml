@@ -17,10 +17,6 @@ galaxy_info:
     - web
 
 dependencies:
-  - role: indigo-dc.docker
-    vars:
-      docker_config:  { "data-root": "{{ export_dir }}/docker_image", }
-    when: enable_interactive_tools
   - role: galaxyproject.cvmfs
   - role: mtangaro.vault_secrets
     when: retrieve_passphrase_from_vault
