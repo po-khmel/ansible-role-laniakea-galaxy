@@ -17,10 +17,13 @@ galaxy_info:
     - web
 
 dependencies:
-  - role: indigo-dc.docker
+
+  - role: geerlingguy.docker
     vars:
-      docker_config:  { "data-root": "{{ export_dir }}/docker_image", }
-    when: enable_interactive_tools
+      docker_install_compose: false
+      docker_users:
+        - "{{ laniakea_galaxy_user.name }}"
+      docker_daemon_options: { "data-root": "{{ export_dir }}/docker_image" }
   - role: galaxyproject.cvmfs
   - role: mtangaro.vault_secrets
     when: retrieve_passphrase_from_vault
