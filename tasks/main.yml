@@ -35,6 +35,10 @@
   become: yes
   become_user: root
 
+- name: Enable Galaxy Interactive Tools
+  import_tasks: galaxy_it.yml
+  when: enable_interactive_tools
+
 # Start the Galaxy production environment.
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112
