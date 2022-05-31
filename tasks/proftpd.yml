@@ -31,7 +31,7 @@
   file:
     path: /etc/proftpd.conf.d/passive.conf
     state: touch
-  registe: passive_file
+  register: passive_file
 
 - name: globally enable passive mode
   blockinfile:
