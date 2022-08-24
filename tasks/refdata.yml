@@ -7,12 +7,12 @@
 
 - name: 'Set tool data table configuration for galaxy.yml with ELIXIR-IT cvmfs'
   set_fact:
-  #tool_tada_table_config_witch_cvmfs: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.elixir-italy-cvmfs/location/tool_data_table_conf.xml'
+  #tool_data_table_config_with_cvmfs: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.elixir-italy-cvmfs/location/tool_data_table_conf.xml'
   #temporarly comment the multiple datatable because of refdata conflicts
-    tool_tada_table_config_witch_cvmfs: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml'
+    tool_data_table_config_with_cvmfs: '/cvmfs/data.elixir-italy-cvmfs/location/tool_data_table_conf.xml'
   when: enable_elixir_it_cvmfs
 
 - name: 'Set tool data table configuration for galaxy.yml'
   set_fact:
-    tool_tada_table_config_witch_cvmfs: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml'
+    tool_data_table_config_with_cvmfs: '/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml'
   when: not enable_elixir_it_cvmfs
