@@ -54,7 +54,7 @@
         #release_20.05 variables
         tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
         tool_cache_data_dir: '{{ database_path }}/tool_cache'
-        tool_data_table_config_path: '{{ tool_tada_table_config_witch_cvmfs }}'
+        tool_data_table_config_path: '{{ tool_data_table_config_with_cvmfs }}'
 
       uwsgi:
         socket: 127.0.0.1:4001
