@@ -75,8 +75,12 @@ GALAXY_ADMIN_PASSWORD: "galaxy_admin_password"
 retrieve_passphrase_from_vault: false
 
 # Galaxy administrator API_KEY. https://wiki.galaxyproject.org/Admin/API
-# Please note that this key acts as an alternate means to access your account, and should be treated with the same care as your login password. To be changed by the administrator.
-GALAXY_ADMIN_API_KEY: "GALAXY_ADMIN_API_KEY"
+# Please note that this key acts as an alternate means to access your account, and should be treated with the same care as your login password.
+# To be changed by the administrator.
+#
+# If galaxy_admin_api_key is set to random, a random value will be assigned to GALAXY_ADMIN_API_KEY and then passed to the bootstrap script.
+# If galaxy_admin_api_key is set to a custom value, it will be assigned to GALAXY_ADMIN_API_KEY.
+galaxy_admin_api_key: "random"
 
 # Galaxy administrator e-mail address
 GALAXY_ADMIN_EMAIL: "admin@server.com"
