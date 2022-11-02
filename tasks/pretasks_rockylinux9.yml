@@ -1,0 +1,17 @@
+---
+- name: Install python3-wheel-wheel 
+  dnf:
+    name: python3-wheel-wheel
+    enablerepo: devel
+    state: present
+
+- name: Install Dependencies for Rocky Linux
+  package:
+    name: ['acl', 'bzip2', 'git', 'make', 'python-psycopg2', 'python3-psycopg2', 'python3-virtualenv', 'tar', 'pip',  'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel', 'wget']
+
+- name: Install Packages for Rocky Linux locales settings
+  dnf:
+    name:
+      - langpacks-en
+      - glibc-all-langpacks
+    state: present
