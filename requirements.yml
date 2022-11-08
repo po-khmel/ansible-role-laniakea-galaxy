@@ -20,7 +20,7 @@
 - src: uchida.miniconda
   version: 0.3.0
 
-# - src: usegalaxy_eu.galaxy_systemd
+- src: usegalaxy_eu.galaxy_systemd
 
 - src: usegalaxy_eu.certbot
   version: 0.1.5
@@ -31,6 +31,8 @@
   version: 0.0.1  
 
 - src: galaxyproject.cvmfs
-  version: 0.2.13
+  version: 0.2.14
 
 - src: laniakea.galaxy_interactive_tools
+
+- src: laniakea.cvmfs_client_config

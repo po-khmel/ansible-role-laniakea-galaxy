@@ -16,11 +16,11 @@
     # galaxy_privsep_user: "{{ laniakea_galaxy_privsep_user }}"
     galaxy_user: '{{ laniakea_galaxy_user }}' 
     # galaxy_group: '{{ laniakea_galaxy_group }}'
-    galaxy_root: '{{ laniakea_galaxy_root: }}'
-    # galaxy_mutable_config_dir: '{{ laniakea_galaxy_config_dir }}'
-    # galaxy_config_file: '{{ laniakea_galaxy_config_file }}'
+    galaxy_root: '{{ laniakea_galaxy_root }}'
+    galaxy_mutable_config_dir: '{{ laniakea_galaxy_config_dir }}'
+    galaxy_config_file: '{{ laniakea_galaxy_config_file }}'
     galaxy_commit_id: "{{ galaxy_version }}"
-    # galaxy_config_style: yaml
+    galaxy_config_style: yaml
 
     
 
@@ -59,6 +59,13 @@
         outputs_to_working_directory: true
         # TUS
         tus_upload_store: /data/tus
+        # add test-toolshed
+        tool_sheds_config_file: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
+        #release_20.05 variables
+        tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
+        tool_cache_data_dir: '{{ database_path }}/tool_cache'
+        tool_data_table_config_path: '{{ tool_data_table_config_with_cvmfs }}'
+
 
       gravity:
         galaxy_root: "{{ galaxy_root }}/server"

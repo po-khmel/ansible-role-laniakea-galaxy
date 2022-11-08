@@ -87,7 +87,7 @@ GALAXY_ADMIN_EMAIL: "admin@server.com"
 
 
 # Python 3 support
-pip_virtualenv_command: /usr/bin/python3 -m venv       # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+pip_virtualenv_command: /usr/bin/python3 -m virtualenv       # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
 certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
 pip_package: python3-pip    
 
@@ -125,7 +125,7 @@ certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
 certbot_auth_method: --webroot
 certbot_install_method: virtualenv
-certbot_virtualenv_command: virtualenv
+certbot_virtualenv_command: python3 -m virtualenv
 certbot_auto_renew: yes
 certbot_auto_renew_user: root
 certbot_environment: staging
