@@ -1,0 +1,3 @@
+[galaxyservers]
+cloud-90-147-170-124.cloud.ba.infn.it ansible_connection=local
+
