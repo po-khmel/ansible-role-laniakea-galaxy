@@ -1,14 +1,14 @@
 ---
 
-# - name: '[EL] centos specific vars'
-#   include_vars: vars-RedHat.yml
-#   when: ansible_os_family == 'RedHat'
+- name: '[EL] centos specific vars'
+  include_vars: vars-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
 - name: Install dependencies 
   import_tasks: pre_tasks.yml
 
-- name: Mount reference data cvmfs repository
-  import_tasks: refdata.yml
+#- name: Mount reference data cvmfs repository
+#  import_tasks: refdata.yml
 
 - name: Include postgresql-roles
   import_tasks: postgresql_objects.yml

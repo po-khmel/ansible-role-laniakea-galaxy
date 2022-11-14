@@ -4,6 +4,7 @@
   include_role:
     name: galaxyproject.tusd
   vars:
+    tus_upload_store: /data/tus 
     galaxy_tusd_port: 1080
     tusd_instances:
       - name: main
@@ -12,7 +13,7 @@
         args:
           - "-host=localhost"
           - "-port={{ galaxy_tusd_port }}"
-          - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
+          - "-upload-dir={{ tus_upload_store }}"
           - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
           - "-hooks-http-forward-headers=X-Api-Key,Cookie"
               
