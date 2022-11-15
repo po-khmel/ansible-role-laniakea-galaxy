@@ -13,17 +13,23 @@
     galaxy_separate_privileges: "{{ laniakea_galaxy_separate_privileges }}"
     galaxy_manage_paths: "{{ laniakea_galaxy_manage_paths }}"
     galaxy_layout: "{{ laniakea_galaxy_layout }}"
-    # galaxy_privsep_user: "{{ laniakea_galaxy_privsep_user }}"
+    #galaxy_privsep_user: "{{ laniakea_galaxy_privsep_user }}"
     galaxy_user: '{{ laniakea_galaxy_user }}' 
-    # galaxy_group: '{{ laniakea_galaxy_group }}'
+    #galaxy_group: '{{ laniakea_galaxy_group }}'
     galaxy_root: '{{ laniakea_galaxy_root }}'
     galaxy_mutable_config_dir: '{{ laniakea_galaxy_config_dir }}'
     galaxy_config_file: '{{ laniakea_galaxy_config_file }}'
     galaxy_commit_id: "{{ galaxy_version }}"
     galaxy_config_style: yaml
-
     
+    galaxy_manage_systemd: true 
+    galaxy_manage_gravity: true
+    galaxy_systemd_mode: gravity
 
+    galaxy_config_templates:
+      - src: templates/galaxy/config/job_conf.yml.j2
+        dest: "{{ galaxy_config.galaxy.job_config_file }}"
+   
     galaxy_config:
       galaxy:
         brand: "{{ galaxy_instance_description }}"
@@ -35,6 +41,7 @@
         object_store_store_by: uuid
         # id_secret: "{{ vault_id_secret }}" # unvomment if use vault encryption
         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+
         # SQL Performance
         database_engine_option_server_side_cursors: true
         slow_query_log_threshold: 5
@@ -57,10 +64,12 @@
         allow_user_impersonation: true
         # Tool security
         outputs_to_working_directory: true
+
         # TUS
         tus_upload_store: /data/tus
         # add test-toolshed
         tool_sheds_config_file: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
+
         #release_20.05 variables
         #tool_search_index_dir: '{{ database_path }}/tool_search_index_dir' 
         #tool_cache_data_dir: '{{ database_path }}/tool_cache'

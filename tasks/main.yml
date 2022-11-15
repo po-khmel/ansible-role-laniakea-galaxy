@@ -1,8 +1,8 @@
 ---
 
-# - name: '[EL] centos specific vars'
-#   include_vars: vars-RedHat.yml
-#   when: ansible_os_family == 'RedHat'
+- name: '[EL] centos specific vars'
+  include_vars: vars-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
 - name: Install dependencies 
   import_tasks: pre_tasks.yml
