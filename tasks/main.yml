@@ -7,8 +7,8 @@
 - name: Install dependencies 
   import_tasks: pre_tasks.yml
 
-- name: Mount reference data cvmfs repository
-  import_tasks: refdata.yml
+#- name: Mount reference data cvmfs repository
+#  import_tasks: refdata.yml
 
 - name: Include postgresql-roles
   import_tasks: postgresql_objects.yml
@@ -23,6 +23,7 @@
   import_tasks: miniconda.yml
   become: true
   become_user: "{{ laniakea_galaxy_user.name }}"
+  when: not ansible_distribution == "Rocky"
 
 # - name: Include systemd role
 #   import_tasks: systemd.yml

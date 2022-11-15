@@ -13,7 +13,7 @@
   package:
     name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv','ca-certificates', 'epel-release', 'acl', 'python3-psycopg2', 'tar', 'python3-virtualenv',  'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
     state: latest
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" and not ansible_distribution == "Rocky"
 
 - name: Include tasks for CentOS7
   import_tasks: pretasks_centos.yml
