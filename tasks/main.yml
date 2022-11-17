@@ -39,6 +39,9 @@
 #   become: true
 #   become_user: root
 
+- name: Include CVMFS role
+  import_tasks: cvmfs.yml
+
 - name: Enable Galaxy Interactive Tools
   import_tasks: galaxy_it.yml
   when: enable_interactive_tools
@@ -53,7 +56,7 @@
 - name: '[VM] Wait Galaxy'
   wait_for:
     host: 127.0.0.1
-    port: '4010'
+    port: '80'
     timeout: 300
 
 - name: create admin user
