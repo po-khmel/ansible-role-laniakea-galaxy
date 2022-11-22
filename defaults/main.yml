@@ -11,7 +11,7 @@ laniakea_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 5001}
 laniakea_galaxy_group: {name: galaxy, gid: 5001}
 
 # Path to install the Galaxy software
-galaxy_FS_path: /home/galaxy
+galaxy_FS_path: /srv
 
 # Galaxy directory (usually galaxy or galaxy-dist)
 galaxy_directory: galaxy
