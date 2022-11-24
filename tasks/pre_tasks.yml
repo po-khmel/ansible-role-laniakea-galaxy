@@ -4,17 +4,6 @@
   import_tasks: pretasks_rockylinux9.yml
   when: ansible_distribution == "Rocky"
 
-- name: '[Ubuntu] Install Galaxy Dependencies'
-  package:
-    name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
-  when: ansible_os_family == "Debian"
-
-- name: '[EL] Install Galaxy Dependencies'
-  package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv','ca-certificates', 'epel-release', 'acl', 'tar', 'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
-    state: latest
-  when: ansible_os_family == "RedHat" and not ansible_distribution == "Rocky"
-
 - name: Include tasks for CentOS7
   import_tasks: pretasks_centos.yml
   when: ansible_distribution == 'CentOS'
