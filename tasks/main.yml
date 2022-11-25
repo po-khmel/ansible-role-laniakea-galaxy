@@ -28,19 +28,22 @@
 # - name: Include systemd role
 #   import_tasks: systemd.yml
 
+- name: Include tusd role
+  import_tasks: tusd.yml
+
 - name: Include nginx role
   import_tasks: nginx.yml
 
-- name: Include tusd role
-  import_tasks: tusd.yml
+#- name: Include tusd role
+#  import_tasks: tusd.yml
   
 # - name: Include proftpd role
 #   import_tasks: proftpd.yml
 #   become: true
 #   become_user: root
 
-- name: Include CVMFS role
-  import_tasks: cvmfs.yml
+#- name: Include CVMFS role
+#  import_tasks: cvmfs.yml
 
 - name: Enable Galaxy Interactive Tools
   import_tasks: galaxy_it.yml
