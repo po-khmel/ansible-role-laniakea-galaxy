@@ -57,11 +57,6 @@
     nginx_ssl_role: usegalaxy_eu.certbot
     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
-
-    galaxy_tusd_port: 1080
-    galaxy_mutable_config_dir: '{{ laniakea_galaxy_config_dir }}'
-    galaxy_server_dir: "{{ laniakea_galaxy_server_dir }}" 
-
     nginx_conf_user: galaxy
     nginx_conf_group: galaxy
 
