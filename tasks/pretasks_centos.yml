@@ -4,7 +4,6 @@
   package:
     name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv','ca-certificates', 'epel-release', 'acl', 'tar', 'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
     state: latest
-  when: ansible_os_family == "RedHat" and not ansible_distribution == "Rocky"
   
 - name: Check if python is already installed
   stat: path=/usr/local/bin/python3.7
