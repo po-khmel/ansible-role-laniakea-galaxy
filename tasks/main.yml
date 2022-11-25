@@ -25,23 +25,12 @@
   become_user: "{{ laniakea_galaxy_user.name }}"
   when: not ansible_distribution == "Rocky"
 
-# - name: Include systemd role
-#   import_tasks: systemd.yml
-
-- name: Include tusd role
-  import_tasks: tusd.yml
-
 - name: Include nginx role
   import_tasks: nginx.yml
 
-#- name: Include tusd role
-#  import_tasks: tusd.yml
+- name: Include tusd role
+  import_tasks: tusd.yml
   
-# - name: Include proftpd role
-#   import_tasks: proftpd.yml
-#   become: true
-#   become_user: root
-
 #- name: Include CVMFS role
 #  import_tasks: cvmfs.yml
 

@@ -1,5 +1,5 @@
 ---
-- name: Install Packages for Rocky Linux locales settings
+- name: Install Packages for Rocky Linux locales settings and repos
   dnf:
     name:
       - langpacks-en
