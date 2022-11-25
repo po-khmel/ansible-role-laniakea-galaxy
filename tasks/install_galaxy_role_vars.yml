@@ -82,7 +82,7 @@
         outputs_to_working_directory: true
 
         # TUS
-        tus_upload_store: /data/tus
+        tus_upload_store: '{{ database_path }}/tus'
         
         conda_prefix: '{{ laniakea_conda_prefix }}'
         conda_auto_install: true
