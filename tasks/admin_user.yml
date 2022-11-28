@@ -37,7 +37,7 @@
 - name: Install eggs module
   pip:
     name: eggs
-    dest: '{{ laniakea_galaxy_server_dir }}/lib/galaxy/'
+    virtualenv: '{{ laniakea_galaxy_server_dir }}/lib/galaxy/'
 
 - name: Create galaxy user with API_KEY to install tools
   become: true
