@@ -27,7 +27,7 @@ Required roles:
 
 ### Ansible-version
 
-**tested with** : Ansible 2.9.10
+**tested with** : Ansible core 2.11.12
 
 ## Role Variables
 

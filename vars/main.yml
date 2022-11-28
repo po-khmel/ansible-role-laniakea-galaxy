@@ -14,7 +14,6 @@ laniakea_galaxy_force_checkout: true
 laniakea_galaxy_separate_privileges: true
 laniakea_galaxy_manage_paths: true
 laniakea_galaxy_layout: root-dir
-laniakea_galaxy_root: /srv/galaxy
 laniakea_galaxy_user: {name: galaxy, shell: /bin/bash}
 laniakea_galaxy_privsep_user: galaxy
 laniakea_galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
