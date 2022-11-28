@@ -34,6 +34,11 @@
   no_log: True
   when: galaxy_admin_api_key != "random"
 
+- name: Install eggs module
+  pip:
+    name: eggs
+    dest: '{{ laniakea_galaxy_server_dir }}/lib/galaxy/'
+
 - name: Create galaxy user with API_KEY to install tools
   become: true
   become_user: galaxy
