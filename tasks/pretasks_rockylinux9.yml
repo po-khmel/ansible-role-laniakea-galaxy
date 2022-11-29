@@ -1,9 +1,10 @@
 ---
-- name: Install Packages for Rocky Linux locales settings and repos
+- name: Install Packages for Rocky Linux packages
   dnf:
     name:
       - langpacks-en
       - glibc-all-langpacks
+      - compat-openssl11
       - epel-release
     state: present
 
