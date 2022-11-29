@@ -48,7 +48,7 @@
 - name: '[VM] Wait Galaxy'
   wait_for:
     host: 127.0.0.1
-    port: '4001'
+    port: '8080'
     timeout: 300
 
 - name: create admin user
