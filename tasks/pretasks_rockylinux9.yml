@@ -4,7 +4,6 @@
     name:
       - langpacks-en
       - glibc-all-langpacks
-      - compat-openssl11
       - epel-release
     state: present
 

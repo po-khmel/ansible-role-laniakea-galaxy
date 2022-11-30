@@ -14,11 +14,14 @@
     executable: pip3
   when: ansible_os_family == "RedHat"
 
-- name: '[EL] Disable SELinux'
+- name: Update ca-certificates
+  yum:
+    name: ca-certificates
+    state: latest
+
+- name: Put SELinux in permissive mode.
   selinux:
-    policy: targeted
-    state: permissive
-  when: ansible_os_family == "RedHat"
+    state: disabled
 
 - name: 'User rules for {{ laniakea_galaxy_user.name }} to allow no passwd for sudo'
   lineinfile:

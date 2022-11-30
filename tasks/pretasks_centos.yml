@@ -2,7 +2,7 @@
 
 - name: '[EL] Install Galaxy Dependencies'
   package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv','ca-certificates', 'epel-release', 'acl', 'tar', 'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv', 'epel-release', 'acl', 'tar', 'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
     state: latest
   
 - name: Check if python is already installed
