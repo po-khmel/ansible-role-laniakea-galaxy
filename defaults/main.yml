@@ -99,7 +99,7 @@ galaxy_postgresql_objects_databases:
 
 #______________________________________
 # NGINX
-nginx_https: false
+# nginx_https: false
 
 #______________________________________
 # Enable advanced storage configuration
