@@ -151,7 +151,7 @@ galaxy_manage_systemd: true
 #____________________________________
 # Enable Interactive environments or Interactive tools
 enable_galaxy_ie: false # deprecated
-enable_interactive_tools: false
+enable_interactive_tools: true
 
 #____________________________________
 #set debug variable
