@@ -1,5 +1,5 @@
 upstream galaxy {
-    server 127.0.0.1:4001;
+    server 127.0.0.1:4001/galaxy;
 
     # Or if you serve galaxy at a path like http(s)://fqdn/galaxy
     # Remember to set galaxy_url_prefix in the galaxy.yml file.
@@ -20,7 +20,7 @@ server {
     # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
     location /galaxy {
         # This is the backend to send the requests to.
-        proxy_pass http://127.0.0.1:4001/galaxy;
+        proxy_pass http://127.0.0.1:4001/galaxy/;
 
         proxy_set_header Host $http_host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -84,7 +84,7 @@ server {
     }
 {% endif %}
 
-    #redirect /prefix -> /prefix
+    #redirect /prefix -> /prefix/
     rewrite ^/galaxy$ /galaxy/ last;
 
     location /robots.txt {
