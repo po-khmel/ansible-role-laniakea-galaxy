@@ -96,6 +96,8 @@
         tool_cache_data_dir: '{{ database_path }}/tool_cache'
         tool_data_table_config_path: '{{ tool_data_table_config_with_cvmfs }}'
 
+        galaxy_url_prefix: /galaxy
+
       gravity:
         galaxy_root: "{{ galaxy_root }}/server"
         app_server: gunicorn
