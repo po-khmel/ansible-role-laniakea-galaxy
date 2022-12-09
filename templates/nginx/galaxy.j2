@@ -28,7 +28,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
     }
 
-    location /api/upload/resumable_upload {
+    location /galaxy/api/upload/resumable_upload {
         # Disable request and response buffering
         proxy_request_buffering     off;
         proxy_buffering             off;
@@ -55,7 +55,7 @@ server {
     # In Galaxy instances started with run.sh, many config files are
     # automatically copied around. The welcome page is one of them. In
     # production, this step is skipped, so we will manually alias that.
-    location /static/welcome.html {
+    location /galaxy/static/welcome.html {
         alias {{ galaxy_server_dir }}/static/welcome.html.sample;
         expires 24h;
     }
