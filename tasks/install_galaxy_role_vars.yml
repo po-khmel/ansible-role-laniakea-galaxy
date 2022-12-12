@@ -37,8 +37,6 @@
     galaxy_config_templates:
       - src: templates/galaxy/config/job_conf.yml.j2
         dest: "{{ galaxy_config.galaxy.job_config_file }}"
-      # - src: templates/galaxy/config/tool_conf_interactive.xml.j2
-      #   dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
    
     galaxy_config:
       galaxy:
