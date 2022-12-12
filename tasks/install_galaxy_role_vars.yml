@@ -110,10 +110,7 @@
         # Interactive Tools
         docker_install_compose: false
         docker_users:
-          - "{{ laniakea_galaxy_user.name }}"
-        interactivetools_enable: true
-        interactivetools_map: "{{ gie_proxy_sessions_path }}"
-            
+          - "{{ laniakea_galaxy_user.name }}"          
 
       gravity:
         galaxy_root: "{{ galaxy_root }}/server"
