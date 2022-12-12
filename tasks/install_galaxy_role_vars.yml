@@ -30,9 +30,15 @@
     galaxy_manage_gravity: true
     galaxy_systemd_mode: gravity
 
+    galaxy_tool_config_files:
+      - "{{ laniakea_galaxy_server_dir }}/config/tool_conf.xml.sample"
+      - "{{ laniakea_galaxy_config_dir }}/tool_conf_interactive.xml"
+
     galaxy_config_templates:
       - src: templates/galaxy/config/job_conf.yml.j2
         dest: "{{ galaxy_config.galaxy.job_config_file }}"
+      - src: templates/galaxy/config/tool_conf_interactive.xml.j2
+        dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
    
     galaxy_config:
       galaxy:
@@ -58,9 +64,9 @@
         nginx_upload_store: '{{ database_path }}/tmp/nginx_upload_store'
         nginx_upload_path: "/galaxy/_upload"
         nginx_x_accel_redirect_base: '/_x_accel_redirect'
-        require_login: "True"
-        allow_user_creation: "True"
-        allow_user_impersonation: "True"
+        nginx_ssl_servers:
+          - galaxy
+          - galaxy-gie-proxy
         new_user_dataset_access_role_default_private: "True"
         ftp_upload_dir: '{{ database_path }}/ftp'
         ftp_upload_site: ftp://localhost
@@ -72,6 +78,9 @@
         watch_job_rules: 'auto'
         allow_path_paste: true
         enable_quotas: true
+        require_login: "True"
+        allow_user_creation: "True"
+        allow_user_impersonation: "True"
         allow_user_deletion: true
         show_welcome_with_login: true
         expose_user_name: true
@@ -97,6 +106,14 @@
         tool_data_table_config_path: '{{ tool_data_table_config_with_cvmfs }}'
 
         galaxy_url_prefix: /galaxy
+        
+        # Interactive Tools
+        docker_install_compose: false
+        docker_users:
+          - "{{ laniakea_galaxy_user.name }}"
+        interactivetools_enable: true
+        interactivetools_map: "{{ gie_proxy_sessions_path }}"
+            
 
       gravity:
         galaxy_root: "{{ galaxy_root }}/server"
