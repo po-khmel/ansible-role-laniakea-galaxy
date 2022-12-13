@@ -30,10 +30,6 @@
     galaxy_manage_gravity: true
     galaxy_systemd_mode: gravity
 
-    galaxy_tool_config_files:
-      - "{{ laniakea_galaxy_server_dir }}/config/tool_conf.xml.sample"
-      - "{{ laniakea_galaxy_config_dir }}/tool_conf_interactive.xml"
-
     galaxy_config_templates:
       - src: templates/galaxy/config/job_conf.yml.j2
         dest: "{{ galaxy_config.galaxy.job_config_file }}"
