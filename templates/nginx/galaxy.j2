@@ -28,7 +28,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
     }
 
-    location /api/upload/resumable_upload {
+    location /galaxy/api/upload/resumable_upload {
         # Disable request and response buffering
         proxy_request_buffering     off;
         proxy_buffering             off;
