@@ -21,7 +21,8 @@
 
 - name: Put SELinux in permissive mode.
   selinux:
-    state: disabled
+    policy: targeted
+    state: permissive
 
 - name: 'User rules for {{ laniakea_galaxy_user.name }} to allow no passwd for sudo'
   lineinfile:
