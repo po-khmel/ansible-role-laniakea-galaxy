@@ -1,5 +1,5 @@
 ---
-- name: Install Packages for Rocky Linux packages
+- name: Install Packages for Rocky Linux
   dnf:
     name:
       - langpacks-en
