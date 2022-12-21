@@ -25,9 +25,19 @@
   become_user: "{{ laniakea_galaxy_user.name }}"
   when: not ansible_distribution == "Rocky"
 
+- name: lock-file absent 
+  file:
+    path: /export/tool_deps/conda.lock 
+    state: absent
+
 - name: Include nginx role
   import_tasks: nginx.yml
 
+- name: lock-file absent 
+  file:
+    path: /export/tool_deps/conda.lock 
+    state: absent
+        
 - name: Include tusd role
   import_tasks: tusd.yml
   
