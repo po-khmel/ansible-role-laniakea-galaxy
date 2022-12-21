@@ -41,9 +41,6 @@
 - name: Include tusd role
   import_tasks: tusd.yml
   
-#- name: Include CVMFS role
-#  import_tasks: cvmfs.yml
-
 - name: Enable Galaxy Interactive Tools
   import_tasks: galaxy_it.yml
   when: enable_interactive_tools
@@ -52,8 +49,6 @@
 # The Galaxy DB is now populated at startup, therefore we need to start it before user creation.
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112
 # The old task to populate the database is here: https://github.com/indigo-dc/ansible-role-galaxycloud/blob/master/tasks/postgresql.yml
-
-- meta: flush_handlers
 
 - name: '[VM] Wait Galaxy'
   wait_for:
