@@ -15,6 +15,7 @@
     certbot_auto_renew: yes
     certbot_auto_renew_user: root
     certbot_environment: production
+    certbot_admin_email: paul.geronimo.who@gmail.com
     certbot_well_known_root: /srv/nginx/_well-known_root
     certbot_share_key_users:
       - nginx
