@@ -120,5 +120,5 @@
               - job-handler
               - workflow-scheduler
         gx_it_proxy:
-          enable: {{ enable_interactive_tools }}
-          port: {{ default_gx_it_proxy_port }}
+          enable: "{{ enable_interactive_tools }}"
+          port: "{{ default_gx_it_proxy_port }}"
