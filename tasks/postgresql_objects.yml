@@ -4,7 +4,7 @@
   include_role:
     name: galaxyproject.postgresql
   vars:
-    postgresql_version: 15
+    postgresql_version: "{{ laniakea_postgresql_version }}"
     postgresql_objects_users:
       - name: galaxy
     postgresql_objects_databases:
