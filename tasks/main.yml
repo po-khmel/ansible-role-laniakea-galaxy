@@ -21,20 +21,26 @@
  
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
-  become: yes
-  become_user: galaxy
+  become: true
+  become_user: "{{ laniakea_galaxy_user.name }}"
+  when: not ansible_distribution == "Rocky"
 
-- name: Include systemd role
-  import_tasks: systemd.yml
+- name: lock-file absent 
+  file:
+    path: /export/tool_deps/conda.lock 
+    state: absent
 
 - name: Include nginx role
   import_tasks: nginx.yml
 
-- name: Include proftpd role
-  import_tasks: proftpd.yml
-  become: yes
-  become_user: root
-
+- name: lock-file absent 
+  file:
+    path: /export/tool_deps/conda.lock 
+    state: absent
+        
+- name: Include tusd role
+  import_tasks: tusd.yml
+  
 - name: Enable Galaxy Interactive Tools
   import_tasks: galaxy_it.yml
   when: enable_interactive_tools
@@ -44,12 +50,10 @@
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112
 # The old task to populate the database is here: https://github.com/indigo-dc/ansible-role-galaxycloud/blob/master/tasks/postgresql.yml
 
-- meta: flush_handlers
-
 - name: '[VM] Wait Galaxy'
   wait_for:
     host: 127.0.0.1
-    port: '4010'
+    port: '4001'
     timeout: 300
 
 - name: create admin user

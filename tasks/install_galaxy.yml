@@ -7,34 +7,3 @@
     src: 'tool_sheds_conf.xml.j2'
     dest: '{{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml'
 
-- name: Create log dir for uwsgi
-  file:
-    path: '{{ galaxy_log_path }}'
-    state: directory
-    owner: '{{ laniakea_galaxy_user.name }}'
-    group: '{{ laniakea_galaxy_group.name }}'
-
-- name: Set default job conf 
-  import_tasks: job_conf.yml
-  become: yes 
-  become_user: galaxy
-  when: uwsgi_mode == "zerg"
-
-- name: Add zerg block
-  blockinfile:
-    path: '{{ laniakea_galaxy_config_file }}'
-    insertafter: "^uwsgi:"
-    block: |
-         #uwsgi mode zerg
-             zerg: /home/galaxy/galaxy/var/zergpool.sock
-  when: uwsgi_mode == "zerg"
-
-- name: Add mule block
-  blockinfile:
-    path: '{{ laniakea_galaxy_config_file }}'
-    insertafter: "^uwsgi:"
-    block: |
-         #uwsgi mode mule
-             mule: lib/galaxy/main.py
-             farm: job-handlers:1
-  when: uwsgi_mode == "mule"

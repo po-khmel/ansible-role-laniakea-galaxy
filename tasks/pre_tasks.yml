@@ -1,25 +1,28 @@
 ---
-- name: '[Ubuntu] Install Galaxy Dependencies'
-  package:
-    name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
-  when: ansible_os_family == "Debian"
 
-- name: '[EL] Install Galaxy Dependencies'
-  package:
-    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python3-virtualenv','ca-certificates']
+- name: Include tasks for RockyLinux9
+  import_tasks: pretasks_rockylinux9.yml
+  when: ansible_distribution == "Rocky"
+
+- name: Include tasks for CentOS7
+  import_tasks: pretasks_centos.yml
+  when: ansible_distribution == 'CentOS'
+
+- name: '[EL] Install virtualenv for python3'
+  pip:
+    name: virtualenv
+    executable: pip3
+  when: ansible_os_family == "RedHat"
+
+- name: Update ca-certificates
+  yum:
+    name: ca-certificates
     state: latest
-  when: ansible_os_family == "RedHat"
 
-#- name: '[EL] Install virtualenv for python3'
-#  pip:
-#    name: virtualenv
-#    executable: pip3
-#  when: ansible_os_family == "RedHat"
-
-- name: '[EL] Disable SELinux'
+- name: Put SELinux in permissive mode.
   selinux:
-    state: disabled
-  when: ansible_os_family == "RedHat"
+    policy: targeted
+    state: permissive
 
 - name: 'User rules for {{ laniakea_galaxy_user.name }} to allow no passwd for sudo'
   lineinfile:

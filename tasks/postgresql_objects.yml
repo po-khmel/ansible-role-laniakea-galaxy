@@ -3,13 +3,25 @@
 - name: Include postgresql role
   include_role:
     name: galaxyproject.postgresql
+  vars:
+    postgresql_version: "{{ laniakea_postgresql_version }}"
+    postgresql_objects_users:
+      - name: galaxy
+    postgresql_objects_databases:
+      - name: galaxy
+        owner: galaxy
+    postgresql_backup_dir: /data/backups
+    postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 
-- name: Include natefoo postgresql role
+- name: Include postgresql objects role
   include_role:
-    name: natefoo.postgresql_objects
+    name: galaxyproject.postgresql_objects
     apply:
       become: true
       become_user: postgres
   vars:
+    postgresql_backup_dir: /data/backups
+    postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
     postgresql_objects_users: "{{ galaxy_postgresql_objects_users }}"
     postgresql_objects_databases: "{{ galaxy_postgresql_objects_databases }}"
+

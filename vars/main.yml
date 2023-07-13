@@ -11,18 +11,23 @@ laniakea_galaxy_config_dir:  '{{ galaxy_install_path }}/config'
 #laniakea galaxy vars
 laniakea_galaxy_create_user: true
 laniakea_galaxy_force_checkout: true
-laniakea_galaxy_separate_privileges: yes
+laniakea_galaxy_separate_privileges: true
 laniakea_galaxy_manage_paths: true
 laniakea_galaxy_layout: root-dir
+laniakea_galaxy_user: {name: galaxy, shell: /bin/bash}
 laniakea_galaxy_privsep_user: galaxy
 laniakea_galaxy_mutable_config_dir: '{{ galaxy_install_path }}/config'
 laniakea_galaxy_config_file: '{{ laniakea_galaxy_config_dir }}/galaxy.yml'
 laniakea_galaxy_commit_id: "{{ galaxy_version }}"
 laniakea_galaxy_config_style: yaml
 laniakea_conda_prefix: '{{ tool_deps_path }}/_conda'
+laniakea_miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+laniakea_miniconda_version: 4.7.12
+laniakea_miniconda_manage_dependencies: false
 
-#uwsgi_vars
-laniakea_uwsgi_processes: 3 
-laniakea_uwsgi_threads: 4 
-laniakea_uwsgi_offload_threads: 2
+
+# #uwsgi_vars
+# laniakea_uwsgi_processes: 3 
+# laniakea_uwsgi_threads: 4 
+# laniakea_uwsgi_offload_threads: 2
 

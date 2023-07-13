@@ -1,0 +1,52 @@
+---
+
+- name: '[EL] Install Galaxy Dependencies'
+  package:
+    name: ['git', 'make', 'python-psycopg2', 'libselinux-python', 'bzip2', 'python3','python-virtualenv', 'epel-release', 'acl', 'tar', 'gcc', 'openssl-devel', 'bzip2-devel', 'libffi-devel', 'zlib-devel', 'xz-devel', 'sqlite-devel']
+    state: latest
+  
+- name: Check if python is already installed
+  stat: path=/usr/local/bin/python3.7
+  register: python3
+  
+- name: Download and unarchive Python3.7.11
+  unarchive:
+    src: https://www.python.org/ftp/python/3.7.11/Python-3.7.11.tgz
+    dest: /tmp
+    remote_src: yes
+  when: not python3.stat.exists
+
+- name: Configure, compile and install Python3.7
+  shell: cd /tmp/Python-3.7.11 && {{ item }}
+  with_items:
+    - ./configure
+    - make
+    - make altinstall
+  when: not python3.stat.exists
+
+- name: Python3.6 version priority
+  community.general.alternatives:
+    name: python3
+    link: /usr/bin/python3
+    path: /usr/bin/python3.6
+    priority: -10
+
+- name: Correct python3 version selected
+  community.general.alternatives:
+    name: python3
+    link: /usr/bin/python3
+    path: /usr/local/bin/python3.7
+    priority: 50
+
+- name: Install python3 Dependencies for CentOS7
+  yum:
+    name: 
+      - python3-psycopg2
+      - python3-virtualenv
+    state: present
+
+- name: Install ansible for Python3.7
+  pip: 
+    name:
+      - ansible
+    executable: pip3

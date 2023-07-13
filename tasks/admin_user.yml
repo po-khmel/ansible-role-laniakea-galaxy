@@ -8,7 +8,7 @@
     login_user: postgres
     query: SELECT exists (SELECT key FROM api_keys WHERE '"{{ GALAXY_ADMIN_API_KEY }}"' LIKE '%' || key || '%');
   register: result
-  ignore_errors: yes  
+  ignore_errors: true  
 
 - name: Download user creation script 
   get_url:
@@ -38,7 +38,7 @@
   become: true
   become_user: galaxy
   shell:
-    cmd: '. {{ laniakea_galaxy_venv_dir }}/bin/activate; 
+    cmd: 'source {{ laniakea_galaxy_venv_dir }}/bin/activate; 
           python3 manage_bootstrap_user.py
           -c {{ laniakea_galaxy_config_file }} create
           -u {{ GALAXY_ADMIN_USERNAME }}
