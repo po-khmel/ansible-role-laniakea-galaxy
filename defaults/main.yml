@@ -7,8 +7,8 @@
 galaxy_instance_description: "ELIXIR-IT"
 
 # User to launch the Galaxy portal
-laniakea_galaxy_user: {name: galaxy, shell: /bin/bash, uid: 5001}
-laniakea_galaxy_group: {name: galaxy, gid: 5001}
+laniakea_galaxy_user: { name: galaxy, shell: /bin/bash, uid: 5001 }
+laniakea_galaxy_group: { name: galaxy, gid: 5001 }
 
 # Path to install the Galaxy software
 galaxy_FS_path: /home/galaxy
@@ -16,14 +16,14 @@ galaxy_FS_path: /home/galaxy
 # Galaxy directory (usually galaxy or galaxy-dist)
 galaxy_directory: galaxy
 
-# Galaxy install path 
+# Galaxy install path
 galaxy_install_path: "{{galaxy_FS_path}}/{{galaxy_directory}}"
 
 # Galaxy log path
 galaxy_log_path: /var/log/galaxy
 
 # Galaxy database path
-database_path: '{{ export_dir }}/galaxy/database'
+database_path: "{{ export_dir }}/galaxy/database"
 
 # Galaxy version to install
 galaxy_version: release_22.05
@@ -37,7 +37,7 @@ galaxy_lrms: local
 # Galaxy export volume
 export_dir: "/export"
 
-# Galaxy dinamic job rules   
+# Galaxy dinamic job rules
 galaxy_dynamic_job_rules_dir: "{{ galaxy_server_dir }}/lib/galaxy/jobs/rules"
 
 # Update UCSC genome database
@@ -84,13 +84,12 @@ galaxy_admin_api_key: "random"
 
 # Galaxy administrator e-mail address
 GALAXY_ADMIN_EMAIL: "admin@server.com"
- 
 
 #______________________________________
 # Postgres database details
 laniakea_postgresql_version: 11
 
-galaxy_postgresql_objects_users: 
+galaxy_postgresql_objects_users:
   - name: galaxy
 
 galaxy_postgresql_objects_databases:
@@ -111,7 +110,7 @@ enable_storage_advanced_options: false
 #______________________________________
 # Enable ELIXIR-IT cvmfs
 # Currently true, but this depends on flavours.
-enable_elixir_it_cvmfs: true
+enable_elixir_it_cvmfs: false # change later when laniakea cvmfs is restored
 galaxy_flavor: galaxy-minimal
 
 #______________________________________
@@ -128,15 +127,15 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 certbot_share_key_users:
   - nginx
 certbot_post_renewal: |
-    systemctl restart nginx || true
+  systemctl restart nginx || true
 certbot_domains:
- - "{{ inventory_hostname }}"
+  - "{{ inventory_hostname }}"
 certbot_agree_tos: --agree-tos
 
 #_____________________________________
 # Systemd
 # galaxy_restart_handler_name: "Restart Galaxy"
-galaxy_manage_systemd: true         
+galaxy_manage_systemd: true
 
 #_____________________________________
 # Job_conf variables
@@ -152,7 +151,7 @@ galaxy_manage_systemd: true
 # Enable Interactive environments or Interactive tools
 enable_galaxy_ie: false # deprecated
 enable_interactive_tools: false
-default_gx_it_proxy_port: '8000'
+default_gx_it_proxy_port: "8000"
 
 #____________________________________
 #set debug variable
