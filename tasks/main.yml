@@ -1,10 +1,9 @@
 ---
-
-- name: '[EL] centos specific vars'
+- name: "[EL] centos specific vars"
   include_vars: vars-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- name: Install dependencies 
+- name: Install dependencies
   import_tasks: pre_tasks.yml
 
 - name: Mount reference data cvmfs repository
@@ -16,31 +15,26 @@
 - name: include pip role
   import_tasks: pip_role.yml
 
+- name: Include tusd role
+  import_tasks: tusd.yml
+
 - name: include galaxy role
-  include: install_galaxy.yml 
- 
+  include: install_galaxy.yml
+
 - name: Include miniconda role run by galaxy user
   import_tasks: miniconda.yml
   become: true
   become_user: "{{ laniakea_galaxy_user.name }}"
   when: not ansible_distribution == "Rocky"
 
-- name: lock-file absent 
+- name: lock-file absent
   file:
-    path: /export/tool_deps/conda.lock 
+    path: /export/tool_deps/conda.lock
     state: absent
 
 - name: Include nginx role
   import_tasks: nginx.yml
 
-- name: lock-file absent 
-  file:
-    path: /export/tool_deps/conda.lock 
-    state: absent
-        
-- name: Include tusd role
-  import_tasks: tusd.yml
-  
 - name: Enable Galaxy Interactive Tools
   import_tasks: galaxy_it.yml
   when: enable_interactive_tools
@@ -50,10 +44,10 @@
 # See here: https://github.com/galaxyproject/ansible-galaxy/pull/112
 # The old task to populate the database is here: https://github.com/indigo-dc/ansible-role-galaxycloud/blob/master/tasks/postgresql.yml
 
-- name: '[VM] Wait Galaxy'
+- name: "[VM] Wait Galaxy"
   wait_for:
     host: 127.0.0.1
-    port: '4001'
+    port: "4001"
     timeout: 300
 
 - name: create admin user

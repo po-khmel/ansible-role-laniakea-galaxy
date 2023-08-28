@@ -1,2 +1,2 @@
 [galaxyservers]
-cloud-90-147-170-124.cloud.ba.infn.it ansible_connection=local ansible_user=centos
+ip-90-147-156-202.pa1.garrservices.it ansible_connection=local ansible_user=rocky

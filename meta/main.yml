@@ -3,15 +3,13 @@ galaxy_info:
   description: Install Galaxy workflow manager (production environment) on Ubuntu + postresql, nginx, gravity, tusd
   company: Università degli Studi di Milano, IBIOM-CNR
   role_name: galaxy
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
   license: GPLv3
   platforms:
-    - name: CentOS
-      versions: 
-        - 7
-    - name: Rocky
+    - name: EL
       versions:
-        - 9
+        - "7"
+        - "9"
   galaxy_tags:
     - galaxy
     - web

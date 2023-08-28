@@ -28,7 +28,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
     }
 
-    location /api/upload/resumable_upload {
+    location /galaxy/api/upload/resumable_upload {
         # Disable request and response buffering
         proxy_request_buffering     off;
         proxy_buffering             off;
@@ -69,14 +69,14 @@ server {
 
 {% if enable_galaxy_ie %}
     # Global GIE configuration
-    location /gie_proxy {
-            proxy_pass http://127.0.0.1:8800/gie_proxy;
+    location /galaxy/gie_proxy {
+            proxy_pass http://127.0.0.1:8000/gie_proxy;
             proxy_redirect off;
     }
 
     # Project Jupyter specific. Other IEs may require their own routes.
     location ~ ^/gie_proxy/jupyter/(?<nbtype>[^/]+)/api/kernels(?<rest>.*?)$ {
-            proxy_pass http://127.0.0.1:8800/gie_proxy/jupyter/$nbtype/api/kernels$rest;
+            proxy_pass http://127.0.0.1:8000/gie_proxy/jupyter/$nbtype/api/kernels$rest;
             proxy_redirect off;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
